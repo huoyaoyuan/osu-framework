@@ -2,28 +2,28 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 using osu.Framework.Lists;
+
+#nullable enable
 
 namespace osu.Framework.IO.Serialization
 {
     /// <summary>
     /// A converter used for serializing/deserializing <see cref="SortedList{T}"/> objects.
     /// </summary>
-    public class SortedListJsonConverter : JsonConverter
+    internal class SortedListJsonConverter : JsonConverter<ISerializableSortedList>
     {
-        public override bool CanConvert(Type objectType) => typeof(ISerializableSortedList).IsAssignableFrom(objectType);
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, [AllowNull] ISerializableSortedList value, JsonSerializer serializer)
         {
-            var list = (ISerializableSortedList)value;
-            list.SerializeTo(writer, serializer);
+            value.SerializeTo(writer, serializer);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override ISerializableSortedList ReadJson(JsonReader reader, Type objectType, [AllowNull] ISerializableSortedList existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
             if (!(existingValue is ISerializableSortedList iList))
-                iList = (ISerializableSortedList)Activator.CreateInstance(objectType);
+                iList = (ISerializableSortedList)Activator.CreateInstance(objectType)!;
 
             iList.DeserializeFrom(reader, serializer);
 

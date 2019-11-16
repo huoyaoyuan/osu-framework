@@ -11,23 +11,26 @@ using osu.Framework.Development;
 using osu.Framework.Extensions.TypeExtensions;
 using osu.Framework.Logging;
 
+#nullable enable
+
 namespace osu.Framework.IO.Stores
 {
     public interface IResourceStore<T> : IDisposable
+        where T : class
     {
         /// <summary>
         /// Retrieves an object from the store.
         /// </summary>
         /// <param name="name">The name of the object.</param>
         /// <returns>The object.</returns>
-        T Get(string name);
+        T? Get(string name);
 
         /// <summary>
         /// Retrieves an object from the store asynchronously.
         /// </summary>
         /// <param name="name">The name of the object.</param>
         /// <returns>The object.</returns>
-        Task<T> GetAsync(string name);
+        Task<T?> GetAsync(string name);
 
         Stream GetStream(string name);
 
@@ -59,6 +62,7 @@ namespace osu.Framework.IO.Stores
         /// <param name="store">The store which the resources was retrieved from.</param>
         /// <param name="resourceName">The resource retrieved.</param>
         internal static void LogIfNonBackgroundThread<T>(this IResourceStore<T> store, string resourceName)
+            where T : class
         {
             if (!DebugUtils.LogPerformanceIssues)
                 return;
