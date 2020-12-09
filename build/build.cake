@@ -123,9 +123,6 @@ Task("CodeFileSanity")
         });
     });
 
-Task("DotnetFormat")
-    .Does(() => DotNetCoreTool(sln.FullPath, "format", "--dry-run --check"));
-
 Task("PackFramework")
     .Does(() => {
         DotNetCorePack(frameworkProject.FullPath, new DotNetCorePackSettings{
@@ -222,7 +219,6 @@ Task("Build")
     .IsDependentOn("Clean")
     .IsDependentOn("DetermineAppveyorBuildProperties")
     .IsDependentOn("CodeFileSanity")
-    .IsDependentOn("DotnetFormat")
     .IsDependentOn("InspectCode")
     .IsDependentOn("Test")
     .IsDependentOn("DetermineAppveyorDeployProperties")
