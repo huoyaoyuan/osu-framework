@@ -4,12 +4,14 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using osu.Framework.Logging;
 using LogLevel = osu.Framework.Logging.LogLevel;
 
 namespace osu.Framework.Platform.Windows.Native
 {
+    [SupportedOSPlatform("windows")]
     internal static class Explorer
     {
         [DllImport("shell32.dll", SetLastError = true)]

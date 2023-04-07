@@ -4,9 +4,11 @@
 #nullable disable
 
 using System;
+using System.Runtime.Versioning;
 
 namespace osu.Framework.Platform.MacOS.Native
 {
+    [SupportedOSPlatform("macos")]
     internal readonly struct NSPasteboard
     {
         internal IntPtr Handle { get; }

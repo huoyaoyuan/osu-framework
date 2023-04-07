@@ -6,12 +6,14 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Tiff;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace osu.Framework.Platform.MacOS.Native
 {
+    [SupportedOSPlatform("macos")]
     internal static class Cocoa
     {
         internal const string LIB_DL = "libSystem.dylib";

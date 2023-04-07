@@ -5,9 +5,11 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace osu.Framework.Platform.MacOS.Native
 {
+    [SupportedOSPlatform("macos")]
     internal readonly struct NSData
     {
         internal IntPtr Handle { get; }

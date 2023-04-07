@@ -4,9 +4,11 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
+using System.Runtime.Versioning;
 
 namespace osu.Framework.Platform.Windows.Native
 {
+    [SupportedOSPlatform("windows")]
     internal static class Execution
     {
         [DllImport("kernel32.dll")]

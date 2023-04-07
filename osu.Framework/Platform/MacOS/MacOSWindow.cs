@@ -4,6 +4,7 @@
 #nullable disable
 
 using System;
+using System.Runtime.Versioning;
 using osu.Framework.Platform.MacOS.Native;
 using osuTK;
 
@@ -12,6 +13,7 @@ namespace osu.Framework.Platform.MacOS
     /// <summary>
     /// macOS-specific subclass of <see cref="SDL2Window"/>.
     /// </summary>
+    [SupportedOSPlatform("macos")]
     public class MacOSWindow : SDL2DesktopWindow
     {
         private static readonly IntPtr sel_hasprecisescrollingdeltas = Selector.Get("hasPreciseScrollingDeltas");

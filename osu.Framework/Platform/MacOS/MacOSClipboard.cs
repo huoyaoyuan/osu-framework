@@ -4,11 +4,13 @@
 #nullable disable
 
 using System;
+using System.Runtime.Versioning;
 using osu.Framework.Platform.MacOS.Native;
 using SixLabors.ImageSharp;
 
 namespace osu.Framework.Platform.MacOS
 {
+    [SupportedOSPlatform("macos")]
     public class MacOSClipboard : Clipboard
     {
         private readonly NSPasteboard generalPasteboard = NSPasteboard.GeneralPasteboard();

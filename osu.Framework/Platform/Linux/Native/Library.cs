@@ -7,9 +7,11 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace osu.Framework.Platform.Linux.Native
 {
+    [SupportedOSPlatform("linux")]
     public static class Library
     {
         [DllImport("libdl.so.2", EntryPoint = "dlopen")]

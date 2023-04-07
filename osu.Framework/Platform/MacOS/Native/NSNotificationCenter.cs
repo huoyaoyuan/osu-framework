@@ -4,9 +4,11 @@
 #nullable disable
 
 using System;
+using System.Runtime.Versioning;
 
 namespace osu.Framework.Platform.MacOS.Native
 {
+    [SupportedOSPlatform("macos")]
     internal static class NSNotificationCenter
     {
         private static readonly IntPtr sel_default_center = Selector.Get("defaultCenter");

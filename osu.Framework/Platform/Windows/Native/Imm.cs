@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Text;
 using Microsoft.Win32.SafeHandles;
 using osu.Framework.Extensions.EnumExtensions;
@@ -14,6 +15,7 @@ namespace osu.Framework.Platform.Windows.Native
     /// Static class for interacting with the Input Method Manager,
     /// the interface between applications and the IME.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     internal static class Imm
     {
         /// <summary>

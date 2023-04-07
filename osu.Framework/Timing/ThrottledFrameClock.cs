@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Versioning;
 using System.Threading;
 using osu.Framework.Platform.Windows.Native;
 
@@ -100,13 +101,17 @@ namespace osu.Framework.Timing
         public void Dispose()
         {
             if (waitableTimer != IntPtr.Zero)
+            {
+                Debug.Assert(OperatingSystem.IsWindows());
                 Execution.CloseHandle(waitableTimer);
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool waitWaitableTimer(TimeSpan timeSpan)
         {
             if (waitableTimer == IntPtr.Zero) return false;
+            Debug.Assert(OperatingSystem.IsWindows());
 
             // Not sure if we want to fall back to Thread.Sleep on failure here, needs further investigation.
             if (Execution.SetWaitableTimerEx(waitableTimer, Execution.CreateFileTime(timeSpan), 0, null, default, IntPtr.Zero, 0))
@@ -118,13 +123,17 @@ namespace osu.Framework.Timing
             return false;
         }
 
+        [SupportedOSPlatform("windows")]
         private void createWaitableTimer()
         {
             try
             {
-                // Attempt to use CREATE_WAITABLE_TIMER_HIGH_RESOLUTION, only available since Windows 10, version 1803.
-                waitableTimer = Execution.CreateWaitableTimerEx(IntPtr.Zero, null,
-                    Execution.CreateWaitableTimerFlags.CREATE_WAITABLE_TIMER_MANUAL_RESET | Execution.CreateWaitableTimerFlags.CREATE_WAITABLE_TIMER_HIGH_RESOLUTION, Execution.TIMER_ALL_ACCESS);
+                if (OperatingSystem.IsWindowsVersionAtLeast(10, 0, 17134))
+                {
+                    // Attempt to use CREATE_WAITABLE_TIMER_HIGH_RESOLUTION, only available since Windows 10, version 1803.
+                    waitableTimer = Execution.CreateWaitableTimerEx(IntPtr.Zero, null,
+                        Execution.CreateWaitableTimerFlags.CREATE_WAITABLE_TIMER_MANUAL_RESET | Execution.CreateWaitableTimerFlags.CREATE_WAITABLE_TIMER_HIGH_RESOLUTION, Execution.TIMER_ALL_ACCESS);
+                }
 
                 if (waitableTimer == IntPtr.Zero)
                 {

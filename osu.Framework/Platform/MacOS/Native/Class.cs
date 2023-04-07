@@ -5,9 +5,11 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace osu.Framework.Platform.MacOS.Native
 {
+    [SupportedOSPlatform("macos")]
     internal static class Class
     {
         [DllImport(Cocoa.LIB_OBJ_C)]

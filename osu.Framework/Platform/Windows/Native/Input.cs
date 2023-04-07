@@ -4,9 +4,11 @@
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace osu.Framework.Platform.Windows.Native
 {
+    [SupportedOSPlatform("windows")]
     internal static class Input
     {
         [DllImport("user32.dll")]
