@@ -1,8 +1,6 @@
 // Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
-#nullable disable
-
 using System;
 using System.Diagnostics;
 using System.Reflection;
@@ -27,29 +25,29 @@ namespace osu.Framework
             return assembly.Location;
         }
 
-        public static Platform OS { get; }
-
-        public static bool IsUnix => OS != Platform.Windows;
-        public static bool IsDesktop => OS == Platform.Linux || OS == Platform.macOS || OS == Platform.Windows;
-        public static bool IsMobile => OS == Platform.iOS || OS == Platform.Android;
-        public static bool IsApple => OS == Platform.iOS || OS == Platform.macOS;
-
-        static RuntimeInfo()
+        public static Platform OS
         {
-            if (OperatingSystem.IsWindows())
-                OS = Platform.Windows;
-            if (OperatingSystem.IsIOS())
-                OS = OS == 0 ? Platform.iOS : throw new InvalidOperationException($"Tried to set OS Platform to {nameof(Platform.iOS)}, but is already {Enum.GetName(OS)}");
-            if (OperatingSystem.IsAndroid())
-                OS = OS == 0 ? Platform.Android : throw new InvalidOperationException($"Tried to set OS Platform to {nameof(Platform.Android)}, but is already {Enum.GetName(OS)}");
-            if (OperatingSystem.IsMacOS())
-                OS = OS == 0 ? Platform.macOS : throw new InvalidOperationException($"Tried to set OS Platform to {nameof(Platform.macOS)}, but is already {Enum.GetName(OS)}");
-            if (OperatingSystem.IsLinux())
-                OS = OS == 0 ? Platform.Linux : throw new InvalidOperationException($"Tried to set OS Platform to {nameof(Platform.Linux)}, but is already {Enum.GetName(OS)}");
+            get
+            {
+                if (OperatingSystem.IsWindows())
+                    return Platform.Windows;
+                if (OperatingSystem.IsIOS())
+                    return Platform.iOS;
+                if (OperatingSystem.IsAndroid())
+                    return Platform.Android;
+                if (OperatingSystem.IsMacOS())
+                    return Platform.macOS;
+                if (OperatingSystem.IsLinux())
+                    return Platform.Linux;
 
-            if (OS == 0)
                 throw new PlatformNotSupportedException("Operating system could not be detected correctly.");
+            }
         }
+
+        public static bool IsUnix => !OperatingSystem.IsWindows();
+        public static bool IsDesktop => OperatingSystem.IsLinux() || OperatingSystem.IsMacOS() || OperatingSystem.IsWindows();
+        public static bool IsMobile => OperatingSystem.IsIOS() || OperatingSystem.IsAndroid();
+        public static bool IsApple => OperatingSystem.IsIOS() || OperatingSystem.IsMacOS();
 
         public enum Platform
         {
