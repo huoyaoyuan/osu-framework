@@ -103,7 +103,7 @@ namespace osu.Framework.Platform
                     // this was added to work around some hardware writing zeroes to a file
                     // before writing actual content, causing corrupt files to exist on disk.
                     // as of .NET 6, flushing is very expensive on macOS so this is limited to only Windows.
-                    if (RuntimeInfo.OS == RuntimeInfo.Platform.Windows)
+                    if (OperatingSystem.IsWindows())
                         return new FlushingStream(path, mode, access);
 
                     return new FileStream(path, mode, access);

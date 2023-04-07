@@ -435,7 +435,7 @@ namespace osu.Framework.Graphics.Veldrid
             // https://github.com/SaschaWillems/vulkan.gpuinfo.org/blob/1e6ca6e3c0763daabd6a101b860ab4354a07f5d3/functions.php#L293-L325
             if (properties.vendorID == 0x10DE) // NVIDIA's versioning convention
                 driverVersion = $"{properties.driverVersion >> 22}.{(properties.driverVersion >> 14) & 0x0FFU}.{(properties.driverVersion >> 6) & 0x0FFU}.{properties.driverVersion & 0x003U}";
-            else if (properties.vendorID == 0x8086 && RuntimeInfo.OS == RuntimeInfo.Platform.Windows) // Intel's versioning convention on Windows
+            else if (properties.vendorID == 0x8086 && OperatingSystem.IsWindows()) // Intel's versioning convention on Windows
                 driverVersion = $"{properties.driverVersion >> 22}.{properties.driverVersion & 0x3FFFU}";
             else // Vulkan's convention
                 driverVersion = $"{properties.driverVersion >> 22}.{(properties.driverVersion >> 12) & 0x3FFU}.{properties.driverVersion & 0xFFFU}";

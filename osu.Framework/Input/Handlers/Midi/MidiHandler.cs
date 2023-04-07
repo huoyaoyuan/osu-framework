@@ -105,7 +105,7 @@ namespace osu.Framework.Input.Handlers.Midi
             }
             catch (Exception e)
             {
-                string message = RuntimeInfo.OS == RuntimeInfo.Platform.Linux
+                string message = OperatingSystem.IsLinux()
                     ? "Is libasound2-dev installed?"
                     : "There may be another application already using MIDI.";
 

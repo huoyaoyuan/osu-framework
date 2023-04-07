@@ -112,7 +112,7 @@ namespace osu.Framework.Graphics.Video
 
         static VideoDecoder()
         {
-            if (RuntimeInfo.OS == RuntimeInfo.Platform.Linux)
+            if (OperatingSystem.IsLinux())
             {
                 // FFmpeg.AutoGen doesn't load libraries as RTLD_GLOBAL, so we must load them ourselves to fix inter-library dependencies
                 // otherwise they would fallback to the system-installed libraries that can differ in version installed.

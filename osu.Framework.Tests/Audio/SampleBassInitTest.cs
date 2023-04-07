@@ -3,6 +3,7 @@
 
 #nullable disable
 
+using System;
 using NUnit.Framework;
 using osu.Framework.Audio.Sample;
 
@@ -33,7 +34,7 @@ namespace osu.Framework.Tests.Audio
         [Test]
         public void TestSampleInitialisesOnUpdateDevice()
         {
-            if (RuntimeInfo.OS == RuntimeInfo.Platform.Linux)
+            if (OperatingSystem.IsLinux())
                 Assert.Ignore("Test may be intermittent on linux (see AudioThread.FreeDevice()).");
 
             Assert.That(sample.IsLoaded, Is.False);

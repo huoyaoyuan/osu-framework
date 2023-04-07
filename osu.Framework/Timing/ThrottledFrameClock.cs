@@ -36,7 +36,7 @@ namespace osu.Framework.Timing
 
         internal ThrottledFrameClock()
         {
-            if (RuntimeInfo.OS == RuntimeInfo.Platform.Windows) createWaitableTimer();
+            if (OperatingSystem.IsWindows()) createWaitableTimer();
         }
 
         public override void ProcessFrame()

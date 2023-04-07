@@ -808,22 +808,13 @@ namespace osu.Framework.Platform
             yield return RendererType.Automatic;
 
             // Preferred per-platform renderers
-            switch (RuntimeInfo.OS)
-            {
-                case RuntimeInfo.Platform.Windows:
-                    yield return RendererType.Direct3D11;
-
-                    break;
-
-                case RuntimeInfo.Platform.macOS:
-                case RuntimeInfo.Platform.iOS:
-                    yield return RendererType.Metal;
-
-                    break;
-            }
+            if (OperatingSystem.IsWindows())
+                yield return RendererType.Direct3D11;
+            else if (RuntimeInfo.IsApple)
+                yield return RendererType.Metal;
 
             // See https://github.com/ppy/osu/issues/23003
-            if (RuntimeInfo.OS != RuntimeInfo.Platform.iOS)
+            if (!OperatingSystem.IsIOS())
             {
                 // Non-veldrid "known-to-work".
                 yield return RendererType.OpenGLLegacy;

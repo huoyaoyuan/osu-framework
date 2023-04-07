@@ -146,7 +146,7 @@ namespace osu.Framework.Threading
         /// </summary>
         internal static void PreloadBass()
         {
-            if (RuntimeInfo.OS == RuntimeInfo.Platform.Linux)
+            if (OperatingSystem.IsLinux())
             {
                 // required for the time being to address libbass_fx.so load failures (see https://github.com/ppy/osu/issues/2852)
                 Library.Load("libbass.so", Library.LoadFlags.RTLD_LAZY | Library.LoadFlags.RTLD_GLOBAL);

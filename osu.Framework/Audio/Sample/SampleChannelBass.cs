@@ -1,6 +1,7 @@
 ﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
+using System;
 using ManagedBass;
 using osu.Framework.Audio.Mixing.Bass;
 using osu.Framework.Audio.Track;
@@ -193,7 +194,7 @@ namespace osu.Framework.Audio.Sample
             // While this shouldn't cause issues, we've had a small subset of users reporting issues on windows.
             // To keep things working let's only apply to other platforms until we know more.
             // See https://github.com/ppy/osu/issues/18652.
-            if (RuntimeInfo.OS != RuntimeInfo.Platform.Windows)
+            if (!OperatingSystem.IsWindows())
                 flags |= BassFlags.AsyncFile;
 
             channel = Bass.SampleGetChannel(sample.SampleId, flags);

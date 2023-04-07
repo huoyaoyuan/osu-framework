@@ -111,48 +111,36 @@ namespace osu.Framework.Graphics.Veldrid
 
             int maxTextureSize = 0;
 
-            switch (RuntimeInfo.OS)
+            if (OperatingSystem.IsWindows())
             {
-                case RuntimeInfo.Platform.Windows:
+                swapchain.Source = SwapchainSource.CreateWin32(graphicsSurface.WindowHandle, IntPtr.Zero);
+            }
+            else if (OperatingSystem.IsMacOS())
+            {
+                // OpenGL doesn't use a swapchain, so it's only needed on Metal.
+                // Creating a Metal surface in general would otherwise destroy the GL context.
+                if (graphicsSurface.Type == GraphicsSurfaceType.Metal)
                 {
-                    swapchain.Source = SwapchainSource.CreateWin32(graphicsSurface.WindowHandle, IntPtr.Zero);
-                    break;
+                    var metalGraphics = (IMetalGraphicsSurface)graphicsSurface;
+                    swapchain.Source = SwapchainSource.CreateNSView(metalGraphics.CreateMetalView());
                 }
-
-                case RuntimeInfo.Platform.macOS:
+            }
+            else if (OperatingSystem.IsIOS())
+            {
+                // OpenGL doesn't use a swapchain, so it's only needed on Metal.
+                // Creating a Metal surface in general would otherwise destroy the GL context.
+                if (graphicsSurface.Type == GraphicsSurfaceType.Metal)
                 {
-                    // OpenGL doesn't use a swapchain, so it's only needed on Metal.
-                    // Creating a Metal surface in general would otherwise destroy the GL context.
-                    if (graphicsSurface.Type == GraphicsSurfaceType.Metal)
-                    {
-                        var metalGraphics = (IMetalGraphicsSurface)graphicsSurface;
-                        swapchain.Source = SwapchainSource.CreateNSView(metalGraphics.CreateMetalView());
-                    }
-
-                    break;
+                    var metalGraphics = (IMetalGraphicsSurface)graphicsSurface;
+                    swapchain.Source = SwapchainSource.CreateUIView(metalGraphics.CreateMetalView());
                 }
-
-                case RuntimeInfo.Platform.iOS:
-                {
-                    // OpenGL doesn't use a swapchain, so it's only needed on Metal.
-                    // Creating a Metal surface in general would otherwise destroy the GL context.
-                    if (graphicsSurface.Type == GraphicsSurfaceType.Metal)
-                    {
-                        var metalGraphics = (IMetalGraphicsSurface)graphicsSurface;
-                        swapchain.Source = SwapchainSource.CreateUIView(metalGraphics.CreateMetalView());
-                    }
-
-                    break;
-                }
-
-                case RuntimeInfo.Platform.Linux:
-                {
-                    var linuxGraphics = (ILinuxGraphicsSurface)graphicsSurface;
-                    swapchain.Source = linuxGraphics.IsWayland
-                        ? SwapchainSource.CreateWayland(graphicsSurface.DisplayHandle, graphicsSurface.WindowHandle)
-                        : SwapchainSource.CreateXlib(graphicsSurface.DisplayHandle, graphicsSurface.WindowHandle);
-                    break;
-                }
+            }
+            else if (OperatingSystem.IsLinux())
+            {
+                var linuxGraphics = (ILinuxGraphicsSurface)graphicsSurface;
+                swapchain.Source = linuxGraphics.IsWayland
+                    ? SwapchainSource.CreateWayland(graphicsSurface.DisplayHandle, graphicsSurface.WindowHandle)
+                    : SwapchainSource.CreateXlib(graphicsSurface.DisplayHandle, graphicsSurface.WindowHandle);
             }
 
             switch (graphicsSurface.Type)

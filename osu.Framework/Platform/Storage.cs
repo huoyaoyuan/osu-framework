@@ -186,7 +186,7 @@ namespace osu.Framework.Platform
                     // as of .NET 6, flushing is very expensive on macOS so this is limited to only Windows,
                     // but it may also be entirely unnecessary due to the temporary file copying performed on this class.
                     // see: https://github.com/ppy/osu-framework/issues/5231
-                    if (RuntimeInfo.OS == RuntimeInfo.Platform.Windows)
+                    if (OperatingSystem.IsWindows())
                     {
                         try
                         {

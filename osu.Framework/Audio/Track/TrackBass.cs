@@ -155,7 +155,7 @@ namespace osu.Framework.Audio.Track
             // While this shouldn't cause issues, we've had a small subset of users reporting issues on windows.
             // To keep things working let's only apply to other platforms until we know more.
             // See https://github.com/ppy/osu/issues/18652.
-            if (RuntimeInfo.OS != RuntimeInfo.Platform.Windows)
+            if (!OperatingSystem.IsWindows())
                 flags |= BassFlags.AsyncFile;
 
             int stream = Bass.CreateStream(StreamSystem.NoBuffer, flags, fileCallbacks.Callbacks, fileCallbacks.Handle);
