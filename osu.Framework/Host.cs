@@ -4,7 +4,7 @@
 #nullable disable
 
 using System;
-using System.Diagnostics;
+using System.Runtime.InteropServices;
 using osu.Framework.Platform;
 using osu.Framework.Platform.Linux;
 using osu.Framework.Platform.MacOS;
@@ -16,21 +16,14 @@ namespace osu.Framework
     {
         public static DesktopGameHost GetSuitableDesktopHost(string gameName, HostOptions hostOptions = null)
         {
-            switch (RuntimeInfo.OS)
-            {
-                case RuntimeInfo.Platform.Windows:
-                    Debug.Assert(OperatingSystem.IsWindows());
-                    return new WindowsGameHost(gameName, hostOptions);
+            if (OperatingSystem.IsWindows())
+                return new WindowsGameHost(gameName, hostOptions);
+            if (OperatingSystem.IsLinux())
+                return new LinuxGameHost(gameName, hostOptions);
+            if (OperatingSystem.IsMacOS())
+                return new MacOSGameHost(gameName, hostOptions);
 
-                case RuntimeInfo.Platform.Linux:
-                    return new LinuxGameHost(gameName, hostOptions);
-
-                case RuntimeInfo.Platform.macOS:
-                    return new MacOSGameHost(gameName, hostOptions);
-
-                default:
-                    throw new InvalidOperationException($"Could not find a suitable host for the selected operating system ({RuntimeInfo.OS}).");
-            }
+            throw new InvalidOperationException($"Could not find a suitable host for the selected operating system ({RuntimeInformation.OSDescription}).");
         }
     }
 }

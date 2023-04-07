@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 using osu.Framework.Input;
 using osu.Framework.Input.Bindings;
 using osu.Framework.Input.Handlers;
@@ -14,6 +15,7 @@ using osu.Framework.Input.Handlers.Mouse;
 
 namespace osu.Framework.Platform.MacOS
 {
+    [SupportedOSPlatform("macos")]
     public class MacOSGameHost : DesktopGameHost
     {
         internal MacOSGameHost(string gameName, HostOptions options)
