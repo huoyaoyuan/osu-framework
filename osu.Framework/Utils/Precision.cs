@@ -4,6 +4,8 @@
 using osuTK;
 using System;
 using osu.Framework.Graphics.Primitives;
+using System.Runtime.Intrinsics;
+using System.Runtime.CompilerServices;
 
 namespace osu.Framework.Utils
 {
@@ -93,9 +95,22 @@ namespace osu.Framework.Utils
         /// <param name="acceptableDifference">The acceptable difference. Defaults to <see cref="FLOAT_EPSILON"/>.</param>
         /// <returns>Whether <paramref name="rect1"/> and <paramref name="rect2"/> intersect.</returns>
         public static bool AlmostIntersects(RectangleF rect1, RectangleF rect2, float acceptableDifference = FLOAT_EPSILON)
-            => rect1.X <= rect2.X + rect2.Width + acceptableDifference
-               && rect2.X <= rect1.X + rect1.Width + acceptableDifference
-               && rect1.Y <= rect2.Y + rect2.Height + acceptableDifference
-               && rect2.Y <= rect1.Y + rect1.Height + acceptableDifference;
+        {
+            if (Vector128.IsHardwareAccelerated)
+            {
+                Vector128<float> vec1 = Vector128.LoadUnsafe(ref Unsafe.AsRef(in rect1.X));
+                Vector128<float> vec2 = Vector128.LoadUnsafe(ref Unsafe.AsRef(in rect2.X));
+                Vector128<float> bound1 = vec1 + Vector128.Shuffle(vec1, Vector128.Create(-1, -1, 0, 1));
+                Vector128<float> bound2 = vec1 + Vector128.Shuffle(vec2, Vector128.Create(-1, -1, 0, 1));
+                Vector128<float> diff = bound1 - Vector128.Shuffle(bound2, Vector128.Create(2, 3, 0, 1));
+                diff = Vector128.Xor(diff, Vector128.Create(0, 0, -0.0f, -0.0f));
+                return Vector128.LessThanOrEqualAll(diff, Vector128.Create(acceptableDifference));
+            }
+
+            return rect1.X <= rect2.X + rect2.Width + acceptableDifference
+                && rect2.X <= rect1.X + rect1.Width + acceptableDifference
+                && rect1.Y <= rect2.Y + rect2.Height + acceptableDifference
+                && rect2.Y <= rect1.Y + rect1.Height + acceptableDifference;
+        }
     }
 }

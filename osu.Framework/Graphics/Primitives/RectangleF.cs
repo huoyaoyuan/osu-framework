@@ -7,7 +7,9 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Intrinsics;
 using osuTK;
 
 namespace osu.Framework.Graphics.Primitives
@@ -19,7 +21,7 @@ namespace osu.Framework.Graphics.Primitives
     {
         /// <summary>Represents an instance of the <see cref="RectangleF"/> class with its members uninitialized.</summary>
         /// <filterpriority>1</filterpriority>
-        public static RectangleF Empty { get; } = new RectangleF();
+        public static RectangleF Empty => new RectangleF();
 
         public float X;
         public float Y;
@@ -283,6 +285,26 @@ namespace osu.Framework.Graphics.Primitives
         /// <filterpriority>1</filterpriority>
         public static RectangleF Intersect(RectangleF a, RectangleF b)
         {
+            if (Vector128.IsHardwareAccelerated)
+            {
+                Vector128<float> vec1 = Vector128.LoadUnsafe(ref Unsafe.As<RectangleF, float>(ref a));
+                Vector128<float> vec2 = Vector128.LoadUnsafe(ref Unsafe.As<RectangleF, float>(ref b));
+                Vector128<float> bound1 = vec1 + Vector128.Shuffle(vec1, Vector128.Create(-1, -1, 0, 1));
+                Vector128<float> bound2 = vec2 + Vector128.Shuffle(vec2, Vector128.Create(-1, -1, 0, 1));
+                bound1 = Vector128.Xor(bound1, Vector128.Create(0, 0, -0.0f, -0.0f));
+                bound2 = Vector128.Xor(bound2, Vector128.Create(0, 0, -0.0f, -0.0f));
+                Vector128<float> minMax = Vector128.Max(bound1, bound2);
+                Vector128<float> result = minMax + Vector128.Shuffle(minMax, Vector128.Create(-1, -1, 0, 1));
+                result = Vector128.Xor(result, Vector128.Create(0, 0, -0.0f, -0.0f)) + Vector128<float>.Zero;
+
+                if (Vector64.IsHardwareAccelerated
+                    ? Vector64.GreaterThanOrEqualAll(result.GetUpper(), Vector64<float>.Zero)
+                    : Vector128.GreaterThanOrEqualAll(Vector128.BitwiseAnd(result, Vector128.Create(0, 0, -1, -1).AsSingle()), Vector128<float>.Zero))
+                    return Unsafe.As<Vector128<float>, RectangleF>(ref result);
+
+                return Empty;
+            }
+
             float x = Math.Max(a.X, b.X);
             float num2 = Math.Min(a.X + a.Width, b.X + b.Width);
             float y = Math.Max(a.Y, b.Y);

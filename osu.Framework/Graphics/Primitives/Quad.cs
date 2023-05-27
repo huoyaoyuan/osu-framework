@@ -4,8 +4,9 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using osuTK;
+using System.Runtime.Intrinsics;
 using osu.Framework.Utils;
+using osuTK;
 
 namespace osu.Framework.Graphics.Primitives
 {
@@ -94,6 +95,20 @@ namespace osu.Framework.Graphics.Primitives
         {
             get
             {
+                if (Vector256.IsHardwareAccelerated && Vector128.IsHardwareAccelerated)
+                {
+                    Vector256<float> v = Vector256.LoadUnsafe(ref Unsafe.AsRef(in TopLeft.X));
+                    Vector256<float> vShuffle = Vector256.Shuffle(v, Vector256.Create(2, 3, 0, 1, 6, 7, 4, 5));
+                    v = Vector256.Xor(v, Vector256.Create(0, 0, -0.0f, -0.0f, 0, 0, -0.0f, -0.0f));
+                    vShuffle = Vector256.Xor(vShuffle, Vector256.Create(0, 0, -0.0f, -0.0f, 0, 0, -0.0f, -0.0f));
+                    Vector256<float> minMaxPack = Vector256.Min(v, vShuffle);
+                    Vector128<float> minMaxResult = Vector128.Min(minMaxPack.GetLower(), minMaxPack.GetUpper());
+                    Vector128<float> result = minMaxResult + Vector128.Shuffle(minMaxResult, Vector128.Create(-1, -1, 0, 1));
+                    result = Vector128.Xor(result, Vector128.Create(0, 0, -0.0f, -0.0f)) + Vector128<float>.Zero;
+
+                    return Unsafe.As<Vector128<float>, RectangleF>(ref result);
+                }
+
                 float xMin = Math.Min(TopLeft.X, Math.Min(TopRight.X, Math.Min(BottomLeft.X, BottomRight.X)));
                 float yMin = Math.Min(TopLeft.Y, Math.Min(TopRight.Y, Math.Min(BottomLeft.Y, BottomRight.Y)));
                 float xMax = Math.Max(TopLeft.X, Math.Max(TopRight.X, Math.Max(BottomLeft.X, BottomRight.X)));
