@@ -2,6 +2,7 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using System.Numerics;
 using System.Runtime.Serialization;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
@@ -9,8 +10,8 @@ using osu.Framework.Graphics.Colour;
 using osu.Framework.Graphics.Effects;
 using osu.Framework.Graphics.Primitives;
 using osu.Framework.Graphics.Transforms;
-using osuTK;
 using osuTK.Graphics;
+using Vector2 = osuTK.Vector2;
 
 namespace osu.Framework.Utils
 {
@@ -156,37 +157,8 @@ namespace osu.Framework.Utils
         public static Colour4 ValueAt(double time, Colour4 startColour, Colour4 endColour, double startTime, double endTime, Easing easing = Easing.None)
             => ValueAt(time, startColour, endColour, startTime, endTime, new DefaultEasingFunction(easing));
 
-        public static byte ValueAt(double time, byte val1, byte val2, double startTime, double endTime, Easing easing = Easing.None)
-            => ValueAt(time, val1, val2, startTime, endTime, new DefaultEasingFunction(easing));
-
-        public static sbyte ValueAt(double time, sbyte val1, sbyte val2, double startTime, double endTime, Easing easing = Easing.None)
-            => ValueAt(time, val1, val2, startTime, endTime, new DefaultEasingFunction(easing));
-
-        public static short ValueAt(double time, short val1, short val2, double startTime, double endTime, Easing easing = Easing.None)
-            => ValueAt(time, val1, val2, startTime, endTime, new DefaultEasingFunction(easing));
-
-        public static ushort ValueAt(double time, ushort val1, ushort val2, double startTime, double endTime, Easing easing = Easing.None)
-            => ValueAt(time, val1, val2, startTime, endTime, new DefaultEasingFunction(easing));
-
-        public static int ValueAt(double time, int val1, int val2, double startTime, double endTime, Easing easing = Easing.None)
-            => ValueAt(time, val1, val2, startTime, endTime, new DefaultEasingFunction(easing));
-
-        public static uint ValueAt(double time, uint val1, uint val2, double startTime, double endTime, Easing easing = Easing.None)
-            => ValueAt(time, val1, val2, startTime, endTime, new DefaultEasingFunction(easing));
-
-        public static long ValueAt(double time, long val1, long val2, double startTime, double endTime, Easing easing = Easing.None)
-            => ValueAt(time, val1, val2, startTime, endTime, new DefaultEasingFunction(easing));
-
-        public static ulong ValueAt(double time, ulong val1, ulong val2, double startTime, double endTime, Easing easing = Easing.None)
-            => ValueAt(time, val1, val2, startTime, endTime, new DefaultEasingFunction(easing));
-
-        public static float ValueAt(double time, float val1, float val2, double startTime, double endTime, Easing easing = Easing.None)
-            => ValueAt(time, val1, val2, startTime, endTime, new DefaultEasingFunction(easing));
-
-        public static decimal ValueAt(double time, decimal val1, decimal val2, double startTime, double endTime, Easing easing = Easing.None)
-            => ValueAt(time, val1, val2, startTime, endTime, new DefaultEasingFunction(easing));
-
-        public static double ValueAt(double time, double val1, double val2, double startTime, double endTime, Easing easing = Easing.None)
+        public static TNumber ValueAt<TNumber>(double time, TNumber val1, TNumber val2, double startTime, double endTime, Easing easing = Easing.None)
+            where TNumber : unmanaged, INumber<TNumber>
             => ValueAt(time, val1, val2, startTime, endTime, new DefaultEasingFunction(easing));
 
         public static Vector2 ValueAt(double time, Vector2 val1, Vector2 val2, double startTime, double endTime, Easing easing = Easing.None)
@@ -194,9 +166,6 @@ namespace osu.Framework.Utils
 
         public static RectangleF ValueAt(double time, RectangleF val1, RectangleF val2, double startTime, double endTime, Easing easing = Easing.None)
             => ValueAt(time, val1, val2, startTime, endTime, new DefaultEasingFunction(easing));
-
-        public static TValue ValueAt<TValue>(double time, TValue startValue, TValue endValue, double startTime, double endTime, Easing easing = Easing.None)
-            => ValueAt(time, startValue, endValue, startTime, endTime, new DefaultEasingFunction(easing));
 
         public static TValue ValueAt<TValue, TEasing>(double time, TValue startValue, TValue endValue, double startTime, double endTime, in TEasing easing)
             where TEasing : IEasingFunction
@@ -292,29 +261,9 @@ namespace osu.Framework.Utils
                     startLinear.A + t * (endLinear.A - startLinear.A)).ToSRGB();
             }
 
-            public static byte ValueAt(double time, byte val1, byte val2, double startTime, double endTime, in TEasing easing)
-                => (byte)Math.Round(ValueAt(time, (double)val1, val2, startTime, endTime, easing));
-
-            public static sbyte ValueAt(double time, sbyte val1, sbyte val2, double startTime, double endTime, in TEasing easing)
-                => (sbyte)Math.Round(ValueAt(time, (double)val1, val2, startTime, endTime, easing));
-
-            public static short ValueAt(double time, short val1, short val2, double startTime, double endTime, in TEasing easing)
-                => (short)Math.Round(ValueAt(time, (double)val1, val2, startTime, endTime, easing));
-
-            public static ushort ValueAt(double time, ushort val1, ushort val2, double startTime, double endTime, in TEasing easing)
-                => (ushort)Math.Round(ValueAt(time, (double)val1, val2, startTime, endTime, easing));
-
-            public static int ValueAt(double time, int val1, int val2, double startTime, double endTime, in TEasing easing)
-                => (int)Math.Round(ValueAt(time, (double)val1, val2, startTime, endTime, easing));
-
-            public static uint ValueAt(double time, uint val1, uint val2, double startTime, double endTime, in TEasing easing)
-                => (uint)Math.Round(ValueAt(time, (double)val1, val2, startTime, endTime, easing));
-
-            public static long ValueAt(double time, long val1, long val2, double startTime, double endTime, in TEasing easing)
-                => (long)Math.Round(ValueAt(time, (double)val1, val2, startTime, endTime, easing));
-
-            public static ulong ValueAt(double time, ulong val1, ulong val2, double startTime, double endTime, in TEasing easing)
-                => (ulong)Math.Round(ValueAt(time, (double)val1, val2, startTime, endTime, easing));
+            public static TInteger ValueAt<TInteger>(double time, TInteger val1, TInteger val2, double startTime, double endTime, in TEasing easing)
+                where TInteger : unmanaged, IBinaryInteger<TInteger>
+                => TInteger.CreateTruncating(Math.Round(ValueAt(time, double.CreateTruncating(val1), double.CreateTruncating(val2), startTime, endTime, easing)));
 
             public static float ValueAt(double time, float val1, float val2, double startTime, double endTime, in TEasing easing)
                 => (float)ValueAt(time, (double)val1, val2, startTime, endTime, easing);
