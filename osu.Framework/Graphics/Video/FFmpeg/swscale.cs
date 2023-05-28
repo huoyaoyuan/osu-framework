@@ -10,14 +10,14 @@ using System.Runtime.InteropServices;
 
 namespace osu.Framework.Graphics.Video.FFmpeg
 {
-    internal unsafe partial struct SwsVector
+    public unsafe partial struct SwsVector
     {
         public double* coeff;
 
         public int length;
     }
 
-    internal unsafe partial struct SwsFilter
+    public unsafe partial struct SwsFilter
     {
         public SwsVector* lumH;
 
@@ -28,11 +28,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public SwsVector* chrV;
     }
 
-    internal partial struct SwsContext
+    public partial struct SwsContext
     {
     }
 
-    internal static unsafe partial class ffmpeg
+    public static unsafe partial class ffmpeg
     {
         [DllImport("swscale", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("unsigned int")]

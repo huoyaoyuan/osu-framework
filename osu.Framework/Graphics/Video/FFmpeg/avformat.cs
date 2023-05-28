@@ -10,19 +10,19 @@ using System.Runtime.InteropServices;
 
 namespace osu.Framework.Graphics.Video.FFmpeg
 {
-    internal partial struct AVDeviceInfoList
+    public partial struct AVDeviceInfoList
     {
     }
 
-    internal partial struct AVDeviceCapabilitiesQuery
+    public partial struct AVDeviceCapabilitiesQuery
     {
     }
 
-    internal partial struct AVCodecTag
+    public partial struct AVCodecTag
     {
     }
 
-    internal unsafe partial struct AVProbeData
+    public unsafe partial struct AVProbeData
     {
         [NativeTypeName("const char *")]
         public sbyte* filename;
@@ -36,7 +36,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public sbyte* mime_type;
     }
 
-    internal unsafe partial struct AVOutputFormat
+    public unsafe partial struct AVOutputFormat
     {
         [NativeTypeName("const char *")]
         public sbyte* name;
@@ -118,7 +118,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public delegate* unmanaged[Cdecl]<AVFormatContext*, AVPacket*, int> check_bitstream;
     }
 
-    internal unsafe partial struct AVInputFormat
+    public unsafe partial struct AVInputFormat
     {
         [NativeTypeName("const char *")]
         public sbyte* name;
@@ -184,7 +184,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public delegate* unmanaged[Cdecl]<AVFormatContext*, AVDeviceCapabilitiesQuery*, int> free_device_capabilities;
     }
 
-    internal enum AVStreamParseType
+    public enum AVStreamParseType
     {
         AVSTREAM_PARSE_NONE,
         AVSTREAM_PARSE_FULL,
@@ -194,7 +194,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AVSTREAM_PARSE_FULL_RAW,
     }
 
-    internal partial struct AVIndexEntry
+    public partial struct AVIndexEntry
     {
         [NativeTypeName("int64_t")]
         public long pos;
@@ -235,11 +235,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int min_distance;
     }
 
-    internal partial struct AVStreamInternal
+    public partial struct AVStreamInternal
     {
     }
 
-    internal unsafe partial struct AVStream
+    public unsafe partial struct AVStream
     {
         public int index;
 
@@ -391,7 +391,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         public AVStreamInternal* @internal;
 
-        internal unsafe partial struct _Anonymous_e__Struct
+        public unsafe partial struct _Anonymous_e__Struct
         {
             [NativeTypeName("int64_t")]
             public long last_dts;
@@ -432,7 +432,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         }
     }
 
-    internal unsafe partial struct AVProgram
+    public unsafe partial struct AVProgram
     {
         public int id;
 
@@ -469,7 +469,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int pts_wrap_behavior;
     }
 
-    internal unsafe partial struct AVChapter
+    public unsafe partial struct AVChapter
     {
         public int id;
 
@@ -484,18 +484,18 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVDictionary* metadata;
     }
 
-    internal enum AVDurationEstimationMethod
+    public enum AVDurationEstimationMethod
     {
         AVFMT_DURATION_FROM_PTS,
         AVFMT_DURATION_FROM_STREAM,
         AVFMT_DURATION_FROM_BITRATE,
     }
 
-    internal partial struct AVFormatInternal
+    public partial struct AVFormatInternal
     {
     }
 
-    internal unsafe partial struct AVFormatContext
+    public unsafe partial struct AVFormatContext
     {
         [NativeTypeName("const AVClass *")]
         public AVClass* av_class;
@@ -686,7 +686,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int max_probe_packets;
     }
 
-    internal unsafe partial struct AVPacketList
+    public unsafe partial struct AVPacketList
     {
         public AVPacket pkt;
 
@@ -694,7 +694,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVPacketList* next;
     }
 
-    internal enum AVTimebaseSource
+    public enum AVTimebaseSource
     {
         AVFMT_TBCF_AUTO = -1,
         AVFMT_TBCF_DECODER,
@@ -702,7 +702,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AVFMT_TBCF_R_FRAMERATE,
     }
 
-    internal unsafe partial struct AVIOInterruptCB
+    public unsafe partial struct AVIOInterruptCB
     {
         [NativeTypeName("int (*)(void *)")]
         public delegate* unmanaged[Cdecl]<void*, int> callback;
@@ -710,7 +710,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public void* opaque;
     }
 
-    internal enum AVIODirEntryType
+    public enum AVIODirEntryType
     {
         AVIO_ENTRY_UNKNOWN,
         AVIO_ENTRY_BLOCK_DEVICE,
@@ -725,7 +725,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AVIO_ENTRY_WORKGROUP,
     }
 
-    internal unsafe partial struct AVIODirEntry
+    public unsafe partial struct AVIODirEntry
     {
         [NativeTypeName("char *")]
         public sbyte* name;
@@ -756,17 +756,17 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public long filemode;
     }
 
-    internal unsafe partial struct AVIODirContext
+    public unsafe partial struct AVIODirContext
     {
         [NativeTypeName("struct URLContext *")]
         public URLContext* url_context;
 
-        internal partial struct URLContext
+        public partial struct URLContext
         {
         }
     }
 
-    internal enum AVIODataMarkerType
+    public enum AVIODataMarkerType
     {
         AVIO_DATA_MARKER_HEADER,
         AVIO_DATA_MARKER_SYNC_POINT,
@@ -776,7 +776,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AVIO_DATA_MARKER_FLUSH_POINT,
     }
 
-    internal unsafe partial struct AVIOContext
+    public unsafe partial struct AVIOContext
     {
         [NativeTypeName("const AVClass *")]
         public AVClass* av_class;
@@ -876,11 +876,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int min_packet_size;
     }
 
-    internal partial struct AVBPrint
+    public partial struct AVBPrint
     {
     }
 
-    internal static unsafe partial class ffmpeg
+    public static unsafe partial class ffmpeg
     {
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_get_packet(AVIOContext* s, AVPacket* pkt, int size);

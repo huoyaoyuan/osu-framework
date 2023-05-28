@@ -15,8 +15,6 @@ av_pkt_dump2
 osu.Framework.Graphics.Video.FFmpeg
 --methodClassName
 ffmpeg
---with-access-specifier
-*=internal
 --output
 avformat.cs
 --headerFile

@@ -21,8 +21,6 @@ av_fopen_utf8
 osu.Framework.Graphics.Video.FFmpeg
 --methodClassName
 ffmpeg
---with-access-specifier
-*=internal
 --output
 avutil.cs
 --headerFile
