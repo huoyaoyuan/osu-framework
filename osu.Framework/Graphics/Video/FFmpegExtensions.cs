@@ -3,7 +3,7 @@
 
 #nullable disable
 
-using FFmpeg.AutoGen;
+using osu.Framework.Graphics.Video.FFmpeg;
 
 namespace osu.Framework.Graphics.Video
 {

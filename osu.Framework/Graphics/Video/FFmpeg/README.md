@@ -43,3 +43,5 @@ Always quote the @rsp parameter in powershell.
 ## Review and Versioning
 
 Please refer to https://github.com/dotnet/ClangSharp#generating-bindings for the parameters of the generator. Just exclude things that won't compile.
+
+Remember to keep LibraryVersionMap in sync with file versions in NativeLibs.

@@ -6,7 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using FFmpeg.AutoGen;
+using osu.Framework.Graphics.Video.FFmpeg;
 
 namespace osu.Framework.Graphics.Video
 {
@@ -21,12 +21,8 @@ namespace osu.Framework.Graphics.Video
 
         public bool IsDecoder => ffmpeg.av_codec_is_decoder(Pointer) != 0;
 
-        private readonly FFmpegFuncs ffmpeg;
-
-        public FFmpegCodec(FFmpegFuncs ffmpeg, AVCodec* codec)
+        public FFmpegCodec(AVCodec* codec)
         {
-            this.ffmpeg = ffmpeg;
-
             Pointer = codec;
             SupportedHwDeviceTypes = new Lazy<IReadOnlyList<AVHWDeviceType>>(() =>
             {
