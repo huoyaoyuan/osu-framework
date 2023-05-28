@@ -3,12 +3,15 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Runtime.Loader;
 using AVFoundation;
 using Foundation;
 using ManagedBass;
 using ManagedBass.Fx;
 using ManagedBass.Mix;
 using ObjCRuntime;
+using osu.Framework.Extensions.ObjectExtensions;
+using osu.Framework.Graphics.Video.FFmpeg;
 using SDL2;
 using Veldrid.SPIRV;
 
@@ -29,6 +32,10 @@ namespace osu.Framework.iOS
             NativeLibrary.SetDllImportResolver(typeof(BassFx).Assembly, (_, assembly, path) => NativeLibrary.Load("@rpath/bass_fx.framework/bass_fx", assembly, path));
             NativeLibrary.SetDllImportResolver(typeof(BassMix).Assembly, (_, assembly, path) => NativeLibrary.Load("@rpath/bassmix.framework/bassmix", assembly, path));
             NativeLibrary.SetDllImportResolver(typeof(SpirvCompilation).Assembly, (_, assembly, path) => NativeLibrary.Load("@rpath/veldrid-spirv.framework/veldrid-spirv", assembly, path));
+
+            // Only one DllImportResolver can be set per assembly.
+            // ResolvingUnmanagedDll allows multiple handlers to run sequentially.
+            AssemblyLoadContext.GetLoadContext(typeof(ffmpeg).Assembly).AsNonNull().ResolvingUnmanagedDll += (assembly, name) => NativeLibrary.Load("__Internal");
 
             game = target;
 
