@@ -190,7 +190,7 @@ namespace osu.Framework.Graphics.Video
             decoderCommands.Enqueue(() =>
             {
                 ffmpeg.avcodec_flush_buffers(codecContext);
-                ffmpeg.av_seek_frame(formatContext, stream->index, (long)(targetTimestamp / timeBaseInSeconds / 1000.0), FFmpegFuncs.AVSEEK_FLAG_BACKWARD);
+                ffmpeg.av_seek_frame(formatContext, stream->index, (long)(targetTimestamp / timeBaseInSeconds / 1000.0), ffmpeg.AVSEEK_FLAG_BACKWARD);
                 skipOutputUntilTime = targetTimestamp;
                 State = DecoderState.Ready;
             });
@@ -305,7 +305,7 @@ namespace osu.Framework.Graphics.Video
             var span = new Span<byte>(bufferPtr, bufferSize);
             int bytesRead = decoder.videoStream.Read(span);
 
-            return bytesRead != 0 ? bytesRead : FFmpegFuncs.AVERROR_EOF;
+            return bytesRead != 0 ? bytesRead : ffmpeg.AVERROR_EOF;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
@@ -332,7 +332,7 @@ namespace osu.Framework.Graphics.Video
                     decoder.videoStream.Seek(offset, SeekOrigin.Begin);
                     break;
 
-                case FFmpegFuncs.AVSEEK_SIZE:
+                case ffmpeg.AVSEEK_SIZE:
                     return decoder.videoStream.Length;
 
                 default:
@@ -355,7 +355,7 @@ namespace osu.Framework.Graphics.Video
             var fcPtr = ffmpeg.avformat_alloc_context();
             formatContext = fcPtr;
             formatContext->pb = ioContext;
-            formatContext->flags |= FFmpegFuncs.AVFMT_FLAG_GENPTS; // required for most HW decoders as they only read `pts`
+            formatContext->flags |= ffmpeg.AVFMT_FLAG_GENPTS; // required for most HW decoders as they only read `pts`
 
             byte* dummyFileName = stackalloc byte[] { (byte)'d', (byte)'u', (byte)'m', (byte)'m', (byte)'y', 0 };
             int openInputResult = ffmpeg.avformat_open_input(&fcPtr, dummyFileName, null, null);
@@ -377,7 +377,7 @@ namespace osu.Framework.Graphics.Video
             if (stream->duration > 0)
                 Duration = stream->duration * timeBaseInSeconds * 1000.0;
             else
-                Duration = formatContext->duration / (double)FFmpegFuncs.AV_TIME_BASE * 1000.0;
+                Duration = formatContext->duration / (double)ffmpeg.AV_TIME_BASE * 1000.0;
         }
 
         private void recreateCodecContext()
@@ -530,7 +530,7 @@ namespace osu.Framework.Graphics.Video
                     int sendPacketResult = sendPacket(receiveFrame, packet);
 
                     // keep the packet data for next frame if we didn't send it successfully.
-                    if (sendPacketResult == -FFmpegFuncs.EAGAIN)
+                    if (sendPacketResult == -ffmpeg.EAGAIN)
                     {
                         unrefPacket = false;
                     }
@@ -539,7 +539,7 @@ namespace osu.Framework.Graphics.Video
                 if (unrefPacket)
                     ffmpeg.av_packet_unref(packet);
             }
-            else if (readFrameResult == FFmpegFuncs.AVERROR_EOF)
+            else if (readFrameResult == ffmpeg.AVERROR_EOF)
             {
                 // Flush decoder.
                 sendPacket(receiveFrame, null);
@@ -554,7 +554,7 @@ namespace osu.Framework.Graphics.Video
                     State = DecoderState.EndOfStream;
                 }
             }
-            else if (readFrameResult == -FFmpegFuncs.EAGAIN)
+            else if (readFrameResult == -ffmpeg.EAGAIN)
             {
                 State = DecoderState.Ready;
                 Thread.Sleep(1);
@@ -573,7 +573,7 @@ namespace osu.Framework.Graphics.Video
 
             // Note: EAGAIN can be returned if there's too many pending frames, which we have to read,
             // otherwise we would get stuck in an infinite loop.
-            if (sendPacketResult == 0 || sendPacketResult == -FFmpegFuncs.EAGAIN)
+            if (sendPacketResult == 0 || sendPacketResult == -ffmpeg.EAGAIN)
             {
                 readDecodedFrames(receiveFrame);
             }
@@ -597,7 +597,7 @@ namespace osu.Framework.Graphics.Video
 
                 if (receiveFrameResult < 0)
                 {
-                    if (receiveFrameResult != -FFmpegFuncs.EAGAIN && receiveFrameResult != FFmpegFuncs.AVERROR_EOF)
+                    if (receiveFrameResult != -ffmpeg.EAGAIN && receiveFrameResult != ffmpeg.AVERROR_EOF)
                     {
                         Logger.Log($"Failed to receive frame from avcodec: {getErrorMessage(receiveFrameResult)}");
                         tryDisableHwDecoding(receiveFrameResult);
@@ -608,7 +608,7 @@ namespace osu.Framework.Graphics.Video
 
                 // use `best_effort_timestamp` as it can be more accurate if timestamps from the source file (pts) are broken.
                 // but some HW codecs don't set it in which case fallback to `pts`
-                long frameTimestamp = receiveFrame->best_effort_timestamp != FFmpegFuncs.AV_NOPTS_VALUE ? receiveFrame->best_effort_timestamp : receiveFrame->pts;
+                long frameTimestamp = receiveFrame->best_effort_timestamp != ffmpeg.AV_NOPTS_VALUE ? receiveFrame->best_effort_timestamp : receiveFrame->pts;
 
                 double frameTime = (frameTimestamp - stream->start_time) * timeBaseInSeconds * 1000;
 
@@ -733,7 +733,7 @@ namespace osu.Framework.Graphics.Video
 
             hwDecodingAllowed = false;
 
-            if (errorCode == -FFmpegFuncs.ENOMEM)
+            if (errorCode == -ffmpeg.ENOMEM)
             {
                 Logger.Log("Disabling hardware decoding of all videos due to a lack of memory");
                 TargetHardwareVideoDecoders.Value = HardwareVideoDecoder.None;
