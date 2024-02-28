@@ -3,6 +3,7 @@
 
 // ReSharper disable InconsistentNaming
 #pragma warning disable IDE1006 // Naming style
+#pragma warning disable IDE0027 // Use expression-body
 
 using System;
 using System.Runtime.InteropServices;
