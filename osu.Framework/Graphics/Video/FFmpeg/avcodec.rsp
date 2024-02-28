@@ -17,8 +17,6 @@ exclude-funcs-with-body
 osu.Framework.Graphics.Video.FFmpeg
 --methodClassName
 FFmpegNative
---with-access-specifier
-*=internal
 --output
 avcodec.cs
 --headerFile

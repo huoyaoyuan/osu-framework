@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace osu.Framework.Graphics.Video.FFmpeg
 {
-    internal enum AVMediaType
+    public enum AVMediaType
     {
         AVMEDIA_TYPE_UNKNOWN = -1,
         AVMEDIA_TYPE_VIDEO,
@@ -21,7 +21,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AVMEDIA_TYPE_NB,
     }
 
-    internal enum AVPictureType
+    public enum AVPictureType
     {
         AV_PICTURE_TYPE_NONE = 0,
         AV_PICTURE_TYPE_I,
@@ -33,11 +33,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AV_PICTURE_TYPE_BI,
     }
 
-    internal partial struct AVBuffer
+    public partial struct AVBuffer
     {
     }
 
-    internal unsafe partial struct AVBufferRef
+    public unsafe partial struct AVBufferRef
     {
         public AVBuffer* buffer;
 
@@ -47,11 +47,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int size;
     }
 
-    internal partial struct AVBufferPool
+    public partial struct AVBufferPool
     {
     }
 
-    internal unsafe partial struct AVDictionaryEntry
+    public unsafe partial struct AVDictionaryEntry
     {
         [NativeTypeName("char *")]
         public sbyte* key;
@@ -60,11 +60,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public sbyte* value;
     }
 
-    internal partial struct AVDictionary
+    public partial struct AVDictionary
     {
     }
 
-    internal enum AVFrameSideDataType
+    public enum AVFrameSideDataType
     {
         AV_FRAME_DATA_PANSCAN,
         AV_FRAME_DATA_A53_CC,
@@ -90,7 +90,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AV_FRAME_DATA_VIDEO_ENC_PARAMS,
     }
 
-    internal enum AVActiveFormatDescription
+    public enum AVActiveFormatDescription
     {
         AV_AFD_SAME = 8,
         AV_AFD_4_3 = 9,
@@ -101,7 +101,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AV_AFD_SP_4_3 = 15,
     }
 
-    internal unsafe partial struct AVFrameSideData
+    public unsafe partial struct AVFrameSideData
     {
         [NativeTypeName("enum AVFrameSideDataType")]
         public AVFrameSideDataType type;
@@ -116,7 +116,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVBufferRef* buf;
     }
 
-    internal partial struct AVRegionOfInterest
+    public partial struct AVRegionOfInterest
     {
         [NativeTypeName("uint32_t")]
         public uint self_size;
@@ -132,7 +132,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVRational qoffset;
     }
 
-    internal unsafe partial struct AVFrame
+    public unsafe partial struct AVFrame
     {
         [NativeTypeName("uint8_t *[8]")]
         public _data_e__FixedBuffer data;
@@ -319,7 +319,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         }
     }
 
-    internal enum AVHWDeviceType
+    public enum AVHWDeviceType
     {
         AV_HWDEVICE_TYPE_NONE,
         AV_HWDEVICE_TYPE_VDPAU,
@@ -335,11 +335,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AV_HWDEVICE_TYPE_VULKAN,
     }
 
-    internal partial struct AVHWDeviceInternal
+    public partial struct AVHWDeviceInternal
     {
     }
 
-    internal unsafe partial struct AVHWDeviceContext
+    public unsafe partial struct AVHWDeviceContext
     {
         [NativeTypeName("const AVClass *")]
         public AVClass* av_class;
@@ -357,11 +357,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public void* user_opaque;
     }
 
-    internal partial struct AVHWFramesInternal
+    public partial struct AVHWFramesInternal
     {
     }
 
-    internal unsafe partial struct AVHWFramesContext
+    public unsafe partial struct AVHWFramesContext
     {
         [NativeTypeName("const AVClass *")]
         public AVClass* av_class;
@@ -394,13 +394,13 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int height;
     }
 
-    internal enum AVHWFrameTransferDirection
+    public enum AVHWFrameTransferDirection
     {
         AV_HWFRAME_TRANSFER_DIRECTION_FROM,
         AV_HWFRAME_TRANSFER_DIRECTION_TO,
     }
 
-    internal unsafe partial struct AVHWFramesConstraints
+    public unsafe partial struct AVHWFramesConstraints
     {
         [NativeTypeName("enum AVPixelFormat *")]
         public AVPixelFormat* valid_hw_formats;
@@ -417,7 +417,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int max_height;
     }
 
-    internal enum AVClassCategory
+    public enum AVClassCategory
     {
         AV_CLASS_CATEGORY_NA = 0,
         AV_CLASS_CATEGORY_INPUT,
@@ -439,11 +439,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AV_CLASS_CATEGORY_NB,
     }
 
-    internal partial struct AVOptionRanges
+    public partial struct AVOptionRanges
     {
     }
 
-    internal unsafe partial struct AVClass
+    public unsafe partial struct AVClass
     {
         [NativeTypeName("const char *")]
         public sbyte* class_name;
@@ -474,12 +474,12 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         [NativeTypeName("int (*)(struct AVOptionRanges **, void *, const char *, int)")]
         public delegate* unmanaged[Cdecl]<AVOptionRanges**, void*, sbyte*, int, int> query_ranges;
 
-        internal partial struct AVOption
+        public partial struct AVOption
         {
         }
     }
 
-    internal enum AVPixelFormat
+    public enum AVPixelFormat
     {
         AV_PIX_FMT_NONE = -1,
         AV_PIX_FMT_YUV420P,
@@ -685,7 +685,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AV_PIX_FMT_NB,
     }
 
-    internal enum AVColorPrimaries
+    public enum AVColorPrimaries
     {
         AVCOL_PRI_RESERVED0 = 0,
         AVCOL_PRI_BT709 = 1,
@@ -706,7 +706,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AVCOL_PRI_NB,
     }
 
-    internal enum AVColorTransferCharacteristic
+    public enum AVColorTransferCharacteristic
     {
         AVCOL_TRC_RESERVED0 = 0,
         AVCOL_TRC_BT709 = 1,
@@ -732,7 +732,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AVCOL_TRC_NB,
     }
 
-    internal enum AVColorSpace
+    public enum AVColorSpace
     {
         AVCOL_SPC_RGB = 0,
         AVCOL_SPC_BT709 = 1,
@@ -753,7 +753,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AVCOL_SPC_NB,
     }
 
-    internal enum AVColorRange
+    public enum AVColorRange
     {
         AVCOL_RANGE_UNSPECIFIED = 0,
         AVCOL_RANGE_MPEG = 1,
@@ -761,7 +761,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AVCOL_RANGE_NB,
     }
 
-    internal enum AVChromaLocation
+    public enum AVChromaLocation
     {
         AVCHROMA_LOC_UNSPECIFIED = 0,
         AVCHROMA_LOC_LEFT = 1,
@@ -773,14 +773,14 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AVCHROMA_LOC_NB,
     }
 
-    internal partial struct AVRational
+    public partial struct AVRational
     {
         public int num;
 
         public int den;
     }
 
-    internal enum AVSampleFormat
+    public enum AVSampleFormat
     {
         AV_SAMPLE_FMT_NONE = -1,
         AV_SAMPLE_FMT_U8,
@@ -798,7 +798,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AV_SAMPLE_FMT_NB,
     }
 
-    internal static unsafe partial class FFmpegNative
+    public static unsafe partial class FFmpegNative
     {
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("unsigned int")]
@@ -1062,7 +1062,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void av_frame_remove_side_data(AVFrame* frame, [NativeTypeName("enum AVFrameSideDataType")] AVFrameSideDataType type);
 
-        internal const int AV_FRAME_CROP_UNALIGNED = 1 << 0;
+        public const int AV_FRAME_CROP_UNALIGNED = 1 << 0;
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_frame_apply_cropping(AVFrame* frame, int flags);
@@ -1122,10 +1122,10 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void av_hwframe_constraints_free(AVHWFramesConstraints** constraints);
 
-        internal const int AV_HWFRAME_MAP_READ = 1 << 0;
-        internal const int AV_HWFRAME_MAP_WRITE = 1 << 1;
-        internal const int AV_HWFRAME_MAP_OVERWRITE = 1 << 2;
-        internal const int AV_HWFRAME_MAP_DIRECT = 1 << 3;
+        public const int AV_HWFRAME_MAP_READ = 1 << 0;
+        public const int AV_HWFRAME_MAP_WRITE = 1 << 1;
+        public const int AV_HWFRAME_MAP_OVERWRITE = 1 << 2;
+        public const int AV_HWFRAME_MAP_DIRECT = 1 << 3;
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_hwframe_map(AVFrame* dst, [NativeTypeName("const AVFrame *")] AVFrame* src, int flags);

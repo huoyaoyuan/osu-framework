@@ -10,15 +10,15 @@ using System.Runtime.InteropServices;
 
 namespace osu.Framework.Graphics.Video.FFmpeg
 {
-    internal partial struct AVFilterPad
+    public partial struct AVFilterPad
     {
     }
 
-    internal partial struct AVFilterFormats
+    public partial struct AVFilterFormats
     {
     }
 
-    internal unsafe partial struct AVFilter
+    public unsafe partial struct AVFilter
     {
         [NativeTypeName("const char *")]
         public sbyte* name;
@@ -69,11 +69,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public delegate* unmanaged[Cdecl]<AVFilterContext*, int> activate;
     }
 
-    internal partial struct AVFilterInternal
+    public partial struct AVFilterInternal
     {
     }
 
-    internal unsafe partial struct AVFilterContext
+    public unsafe partial struct AVFilterContext
     {
         [NativeTypeName("const AVClass *")]
         public AVClass* av_class;
@@ -128,12 +128,12 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         public int extra_hw_frames;
 
-        internal partial struct AVFilterCommand
+        public partial struct AVFilterCommand
         {
         }
     }
 
-    internal unsafe partial struct AVFilterLink
+    public unsafe partial struct AVFilterLink
     {
         public AVFilterContext* src;
 
@@ -221,20 +221,20 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         [NativeTypeName("char[61440]")]
         public fixed sbyte reserved[61440];
 
-        internal partial struct AVFilterChannelLayouts
+        public partial struct AVFilterChannelLayouts
         {
         }
 
-        internal const int AVLINK_UNINIT = 0;
-        internal const int AVLINK_STARTINIT = 1;
-        internal const int AVLINK_INIT = 2;
+        public const int AVLINK_UNINIT = 0;
+        public const int AVLINK_STARTINIT = 1;
+        public const int AVLINK_INIT = 2;
     }
 
-    internal partial struct AVFilterGraphInternal
+    public partial struct AVFilterGraphInternal
     {
     }
 
-    internal unsafe partial struct AVFilterGraph
+    public unsafe partial struct AVFilterGraph
     {
         [NativeTypeName("const AVClass *")]
         public AVClass* av_class;
@@ -273,7 +273,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public uint disable_auto_convert;
     }
 
-    internal unsafe partial struct AVFilterInOut
+    public unsafe partial struct AVFilterInOut
     {
         [NativeTypeName("char *")]
         public sbyte* name;
@@ -286,7 +286,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVFilterInOut* next;
     }
 
-    internal static unsafe partial class FFmpegNative
+    public static unsafe partial class FFmpegNative
     {
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("unsigned int")]
@@ -383,8 +383,8 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void avfilter_graph_set_auto_convert(AVFilterGraph* graph, [NativeTypeName("unsigned int")] uint flags);
 
-        internal const int AVFILTER_AUTO_CONVERT_ALL = 0;
-        internal const int AVFILTER_AUTO_CONVERT_NONE = -1;
+        public const int AVFILTER_AUTO_CONVERT_ALL = 0;
+        public const int AVFILTER_AUTO_CONVERT_NONE = -1;
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int avfilter_graph_config(AVFilterGraph* graphctx, void* log_ctx);

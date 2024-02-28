@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace osu.Framework.Graphics.Video.FFmpeg
 {
-    internal enum AVDiscard
+    public enum AVDiscard
     {
         AVDISCARD_NONE = -16,
         AVDISCARD_DEFAULT = 0,
@@ -21,7 +21,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AVDISCARD_ALL = 48,
     }
 
-    internal enum AVAudioServiceType
+    public enum AVAudioServiceType
     {
         AV_AUDIO_SERVICE_TYPE_MAIN = 0,
         AV_AUDIO_SERVICE_TYPE_EFFECTS = 1,
@@ -35,7 +35,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AV_AUDIO_SERVICE_TYPE_NB,
     }
 
-    internal partial struct RcOverride
+    public partial struct RcOverride
     {
         public int start_frame;
 
@@ -46,7 +46,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public float quality_factor;
     }
 
-    internal unsafe partial struct AVPanScan
+    public unsafe partial struct AVPanScan
     {
         public int id;
 
@@ -58,7 +58,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public fixed short position[3 * 2];
     }
 
-    internal partial struct AVCPBProperties
+    public partial struct AVCPBProperties
     {
         public int max_bitrate;
 
@@ -72,7 +72,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public ulong vbv_delay;
     }
 
-    internal partial struct AVProducerReferenceTime
+    public partial struct AVProducerReferenceTime
     {
         [NativeTypeName("int64_t")]
         public long wallclock;
@@ -80,11 +80,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int flags;
     }
 
-    internal partial struct AVCodecInternal
+    public partial struct AVCodecInternal
     {
     }
 
-    internal unsafe partial struct AVCodecContext
+    public unsafe partial struct AVCodecContext
     {
         [NativeTypeName("const AVClass *")]
         public AVClass* av_class;
@@ -561,15 +561,15 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int export_side_data;
     }
 
-    internal partial struct AVCodecContext
+    public partial struct AVCodecContext
     {
     }
 
-    internal partial struct MpegEncContext
+    public partial struct MpegEncContext
     {
     }
 
-    internal unsafe partial struct AVHWAccel
+    public unsafe partial struct AVHWAccel
     {
         [NativeTypeName("const char *")]
         public sbyte* name;
@@ -619,7 +619,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public delegate* unmanaged[Cdecl]<AVCodecContext*, AVBufferRef*, int> frame_params;
     }
 
-    internal unsafe partial struct AVPicture
+    public unsafe partial struct AVPicture
     {
         [NativeTypeName("uint8_t *[8]")]
         [Obsolete]
@@ -654,7 +654,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         }
     }
 
-    internal enum AVSubtitleType
+    public enum AVSubtitleType
     {
         SUBTITLE_NONE,
         SUBTITLE_BITMAP,
@@ -662,7 +662,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         SUBTITLE_ASS,
     }
 
-    internal unsafe partial struct AVSubtitleRect
+    public unsafe partial struct AVSubtitleRect
     {
         public int x;
 
@@ -714,7 +714,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         }
     }
 
-    internal unsafe partial struct AVSubtitle
+    public unsafe partial struct AVSubtitle
     {
         [NativeTypeName("uint16_t")]
         public ushort format;
@@ -734,11 +734,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public long pts;
     }
 
-    internal partial struct AVSubtitle
+    public partial struct AVSubtitle
     {
     }
 
-    internal enum AVPictureStructure
+    public enum AVPictureStructure
     {
         AV_PICTURE_STRUCTURE_UNKNOWN,
         AV_PICTURE_STRUCTURE_TOP_FIELD,
@@ -746,7 +746,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AV_PICTURE_STRUCTURE_FRAME,
     }
 
-    internal unsafe partial struct AVCodecParserContext
+    public unsafe partial struct AVCodecParserContext
     {
         public void* priv_data;
 
@@ -841,7 +841,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int format;
     }
 
-    internal unsafe partial struct AVCodecParser
+    public unsafe partial struct AVCodecParser
     {
         [NativeTypeName("int[5]")]
         public fixed int codec_ids[5];
@@ -864,7 +864,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVCodecParser* next;
     }
 
-    internal unsafe partial struct AVBitStreamFilterContext
+    public unsafe partial struct AVBitStreamFilterContext
     {
         public void* priv_data;
 
@@ -880,7 +880,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public sbyte* args;
     }
 
-    internal enum AVLockOp
+    public enum AVLockOp
     {
         AV_LOCK_CREATE,
         AV_LOCK_OBTAIN,
@@ -888,11 +888,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AV_LOCK_DESTROY,
     }
 
-    internal partial struct AVBSFInternal
+    public partial struct AVBSFInternal
     {
     }
 
-    internal unsafe partial struct AVBSFContext
+    public unsafe partial struct AVBSFContext
     {
         [NativeTypeName("const AVClass *")]
         public AVClass* av_class;
@@ -913,7 +913,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVRational time_base_out;
     }
 
-    internal unsafe partial struct AVBitStreamFilter
+    public unsafe partial struct AVBitStreamFilter
     {
         [NativeTypeName("const char *")]
         public sbyte* name;
@@ -939,11 +939,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public delegate* unmanaged[Cdecl]<AVBSFContext*, void> flush;
     }
 
-    internal partial struct AVBSFList
+    public partial struct AVBSFList
     {
     }
 
-    internal unsafe partial struct AVProfile
+    public unsafe partial struct AVProfile
     {
         public int profile;
 
@@ -951,15 +951,15 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public sbyte* name;
     }
 
-    internal partial struct AVCodecDefault
+    public partial struct AVCodecDefault
     {
     }
 
-    internal partial struct AVPacket
+    public partial struct AVPacket
     {
     }
 
-    internal unsafe partial struct AVPacket
+    public unsafe partial struct AVPacket
     {
         public AVBufferRef* buf;
 
@@ -993,7 +993,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public long convergence_duration;
     }
 
-    internal unsafe partial struct AVCodec
+    public unsafe partial struct AVCodec
     {
         [NativeTypeName("const char *")]
         public sbyte* name;
@@ -1088,12 +1088,12 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         [NativeTypeName("const uint32_t *")]
         public uint* codec_tags;
 
-        internal partial struct AVCodecHWConfigInternal
+        public partial struct AVCodecHWConfigInternal
         {
         }
     }
 
-    internal partial struct AVCodecHWConfig
+    public partial struct AVCodecHWConfig
     {
         [NativeTypeName("enum AVPixelFormat")]
         public AVPixelFormat pix_fmt;
@@ -1104,7 +1104,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVHWDeviceType device_type;
     }
 
-    internal unsafe partial struct AVCodecDescriptor
+    public unsafe partial struct AVCodecDescriptor
     {
         [NativeTypeName("enum AVCodecID")]
         public AVCodecID id;
@@ -1126,12 +1126,12 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         [NativeTypeName("const struct AVProfile *")]
         public AVProfile* profiles;
 
-        internal partial struct AVProfile
+        public partial struct AVProfile
         {
         }
     }
 
-    internal enum AVCodecID
+    public enum AVCodecID
     {
         AV_CODEC_ID_NONE,
         AV_CODEC_ID_MPEG1VIDEO,
@@ -1616,7 +1616,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AV_CODEC_ID_WRAPPED_AVFRAME = 0x21001,
     }
 
-    internal enum AVFieldOrder
+    public enum AVFieldOrder
     {
         AV_FIELD_UNKNOWN,
         AV_FIELD_PROGRESSIVE,
@@ -1626,7 +1626,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AV_FIELD_BT,
     }
 
-    internal unsafe partial struct AVCodecParameters
+    public unsafe partial struct AVCodecParameters
     {
         [NativeTypeName("enum AVMediaType")]
         public AVMediaType codec_type;
@@ -1699,7 +1699,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int seek_preroll;
     }
 
-    internal enum AVPacketSideDataType
+    public enum AVPacketSideDataType
     {
         AV_PKT_DATA_PALETTE,
         AV_PKT_DATA_NEW_EXTRADATA,
@@ -1734,7 +1734,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AV_PKT_DATA_NB,
     }
 
-    internal unsafe partial struct AVPacketSideData
+    public unsafe partial struct AVPacketSideData
     {
         [NativeTypeName("uint8_t *")]
         public byte* data;
@@ -1745,7 +1745,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVPacketSideDataType type;
     }
 
-    internal enum AVSideDataParamChangeFlags
+    public enum AVSideDataParamChangeFlags
     {
         AV_SIDE_DATA_PARAM_CHANGE_CHANNEL_COUNT = 0x0001,
         AV_SIDE_DATA_PARAM_CHANGE_CHANNEL_LAYOUT = 0x0002,
@@ -1753,7 +1753,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         AV_SIDE_DATA_PARAM_CHANGE_DIMENSIONS = 0x0008,
     }
 
-    internal static unsafe partial class FFmpegNative
+    public static unsafe partial class FFmpegNative
     {
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [Obsolete]
@@ -2178,10 +2178,10 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_codec_is_decoder([NativeTypeName("const AVCodec *")] AVCodec* codec);
 
-        internal const int AV_CODEC_HW_CONFIG_METHOD_HW_DEVICE_CTX = 0x01;
-        internal const int AV_CODEC_HW_CONFIG_METHOD_HW_FRAMES_CTX = 0x02;
-        internal const int AV_CODEC_HW_CONFIG_METHOD_INTERNAL = 0x04;
-        internal const int AV_CODEC_HW_CONFIG_METHOD_AD_HOC = 0x08;
+        public const int AV_CODEC_HW_CONFIG_METHOD_HW_DEVICE_CTX = 0x01;
+        public const int AV_CODEC_HW_CONFIG_METHOD_HW_FRAMES_CTX = 0x02;
+        public const int AV_CODEC_HW_CONFIG_METHOD_INTERNAL = 0x04;
+        public const int AV_CODEC_HW_CONFIG_METHOD_AD_HOC = 0x08;
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const AVCodecHWConfig *")]
