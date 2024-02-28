@@ -2,9 +2,11 @@
 libavutil/avutil.h
 libavutil/buffer.h
 libavutil/dict.h
+libavutil/error.h
 libavutil/frame.h
 libavutil/hwcontext.h
 libavutil/log.h
+libavutil/mem.h
 libavutil/pixfmt.h
 libavutil/rational.h
 libavutil/samplefmt.h

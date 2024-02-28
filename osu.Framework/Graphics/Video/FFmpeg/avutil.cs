@@ -908,6 +908,9 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern int av_dict_get_string([NativeTypeName("const AVDictionary *")] AVDictionary* m, [NativeTypeName("char **")] byte** buffer, [NativeTypeName("const char")] byte key_val_sep, [NativeTypeName("const char")] byte pairs_sep);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int av_strerror(int errnum, [NativeTypeName("char *")] byte* errbuf, [NativeTypeName("size_t")] nuint errbuf_size);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("int64_t")]
         [Obsolete]
         public static extern long av_frame_get_best_effort_timestamp([NativeTypeName("const AVFrame *")] AVFrame* frame);
@@ -1172,6 +1175,77 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_log_get_flags();
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void* av_malloc([NativeTypeName("size_t")] nuint size);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void* av_mallocz([NativeTypeName("size_t")] nuint size);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void* av_malloc_array([NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void* av_mallocz_array([NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void* av_calloc([NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void* av_realloc(void* ptr, [NativeTypeName("size_t")] nuint size);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int av_reallocp(void* ptr, [NativeTypeName("size_t")] nuint size);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void* av_realloc_f(void* ptr, [NativeTypeName("size_t")] nuint nelem, [NativeTypeName("size_t")] nuint elsize);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void* av_realloc_array(void* ptr, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int av_reallocp_array(void* ptr, [NativeTypeName("size_t")] nuint nmemb, [NativeTypeName("size_t")] nuint size);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void* av_fast_realloc(void* ptr, [NativeTypeName("unsigned int *")] uint* size, [NativeTypeName("size_t")] nuint min_size);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void av_fast_malloc(void* ptr, [NativeTypeName("unsigned int *")] uint* size, [NativeTypeName("size_t")] nuint min_size);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void av_fast_mallocz(void* ptr, [NativeTypeName("unsigned int *")] uint* size, [NativeTypeName("size_t")] nuint min_size);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void av_free(void* ptr);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void av_freep(void* ptr);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("char *")]
+        public static extern byte* av_strdup([NativeTypeName("const char *")] byte* s);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("char *")]
+        public static extern byte* av_strndup([NativeTypeName("const char *")] byte* s, [NativeTypeName("size_t")] nuint len);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void* av_memdup([NativeTypeName("const void *")] void* p, [NativeTypeName("size_t")] nuint size);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void av_memcpy_backptr([NativeTypeName("uint8_t *")] byte* dst, int back, int cnt);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void av_dynarray_add(void* tab_ptr, int* nb_ptr, void* elem);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int av_dynarray_add_nofree(void* tab_ptr, int* nb_ptr, void* elem);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void* av_dynarray2_add(void** tab_ptr, int* nb_ptr, [NativeTypeName("size_t")] nuint elem_size, [NativeTypeName("const uint8_t *")] byte* elem_data);
+
+        [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void av_max_alloc([NativeTypeName("size_t")] nuint max);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_reduce(int* dst_num, int* dst_den, [NativeTypeName("int64_t")] long num, [NativeTypeName("int64_t")] long den, [NativeTypeName("int64_t")] long max);
