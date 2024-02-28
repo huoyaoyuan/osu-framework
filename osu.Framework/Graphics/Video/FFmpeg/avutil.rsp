@@ -15,6 +15,8 @@ c
 --config
 unix-types
 exclude-funcs-with-body
+--remap
+char=byte
 --exclude
 av_fopen_utf8
 --namespace

@@ -54,10 +54,10 @@ namespace osu.Framework.Graphics.Video.FFmpeg
     public unsafe partial struct AVDictionaryEntry
     {
         [NativeTypeName("char *")]
-        public sbyte* key;
+        public byte* key;
 
         [NativeTypeName("char *")]
-        public sbyte* value;
+        public byte* value;
     }
 
     public partial struct AVDictionary
@@ -446,10 +446,10 @@ namespace osu.Framework.Graphics.Video.FFmpeg
     public unsafe partial struct AVClass
     {
         [NativeTypeName("const char *")]
-        public sbyte* class_name;
+        public byte* class_name;
 
         [NativeTypeName("const char *(*)(void *)")]
-        public delegate* unmanaged[Cdecl]<void*, sbyte*> item_name;
+        public delegate* unmanaged[Cdecl]<void*, byte*> item_name;
 
         [NativeTypeName("const struct AVOption *")]
         public AVOption* option;
@@ -472,7 +472,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public delegate* unmanaged[Cdecl]<void*, AVClassCategory> get_category;
 
         [NativeTypeName("int (*)(struct AVOptionRanges **, void *, const char *, int)")]
-        public delegate* unmanaged[Cdecl]<AVOptionRanges**, void*, sbyte*, int, int> query_ranges;
+        public delegate* unmanaged[Cdecl]<AVOptionRanges**, void*, byte*, int, int> query_ranges;
 
         public partial struct AVOption
         {
@@ -806,23 +806,23 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* av_version_info();
+        public static extern byte* av_version_info();
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* avutil_configuration();
+        public static extern byte* avutil_configuration();
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* avutil_license();
+        public static extern byte* avutil_license();
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* av_get_media_type_string([NativeTypeName("enum AVMediaType")] AVMediaType media_type);
+        public static extern byte* av_get_media_type_string([NativeTypeName("enum AVMediaType")] AVMediaType media_type);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("char")]
-        public static extern sbyte av_get_picture_type_char([NativeTypeName("enum AVPictureType")] AVPictureType pict_type);
+        public static extern byte av_get_picture_type_char([NativeTypeName("enum AVPictureType")] AVPictureType pict_type);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("unsigned int")]
@@ -833,7 +833,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("char *")]
-        public static extern sbyte* av_fourcc_make_string([NativeTypeName("char *")] sbyte* buf, [NativeTypeName("uint32_t")] uint fourcc);
+        public static extern byte* av_fourcc_make_string([NativeTypeName("char *")] byte* buf, [NativeTypeName("uint32_t")] uint fourcc);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern AVBufferRef* av_buffer_alloc(int size);
@@ -884,19 +884,19 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern void* av_buffer_pool_buffer_get_opaque(AVBufferRef* @ref);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern AVDictionaryEntry* av_dict_get([NativeTypeName("const AVDictionary *")] AVDictionary* m, [NativeTypeName("const char *")] sbyte* key, [NativeTypeName("const AVDictionaryEntry *")] AVDictionaryEntry* prev, int flags);
+        public static extern AVDictionaryEntry* av_dict_get([NativeTypeName("const AVDictionary *")] AVDictionary* m, [NativeTypeName("const char *")] byte* key, [NativeTypeName("const AVDictionaryEntry *")] AVDictionaryEntry* prev, int flags);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_dict_count([NativeTypeName("const AVDictionary *")] AVDictionary* m);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_dict_set(AVDictionary** pm, [NativeTypeName("const char *")] sbyte* key, [NativeTypeName("const char *")] sbyte* value, int flags);
+        public static extern int av_dict_set(AVDictionary** pm, [NativeTypeName("const char *")] byte* key, [NativeTypeName("const char *")] byte* value, int flags);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_dict_set_int(AVDictionary** pm, [NativeTypeName("const char *")] sbyte* key, [NativeTypeName("int64_t")] long value, int flags);
+        public static extern int av_dict_set_int(AVDictionary** pm, [NativeTypeName("const char *")] byte* key, [NativeTypeName("int64_t")] long value, int flags);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_dict_parse_string(AVDictionary** pm, [NativeTypeName("const char *")] sbyte* str, [NativeTypeName("const char *")] sbyte* key_val_sep, [NativeTypeName("const char *")] sbyte* pairs_sep, int flags);
+        public static extern int av_dict_parse_string(AVDictionary** pm, [NativeTypeName("const char *")] byte* str, [NativeTypeName("const char *")] byte* key_val_sep, [NativeTypeName("const char *")] byte* pairs_sep, int flags);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_dict_copy(AVDictionary** dst, [NativeTypeName("const AVDictionary *")] AVDictionary* src, int flags);
@@ -905,7 +905,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern void av_dict_free(AVDictionary** m);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_dict_get_string([NativeTypeName("const AVDictionary *")] AVDictionary* m, [NativeTypeName("char **")] sbyte** buffer, [NativeTypeName("const char")] sbyte key_val_sep, [NativeTypeName("const char")] sbyte pairs_sep);
+        public static extern int av_dict_get_string([NativeTypeName("const AVDictionary *")] AVDictionary* m, [NativeTypeName("char **")] byte** buffer, [NativeTypeName("const char")] byte key_val_sep, [NativeTypeName("const char")] byte pairs_sep);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("int64_t")]
@@ -1012,7 +1012,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* av_get_colorspace_name([NativeTypeName("enum AVColorSpace")] AVColorSpace val);
+        public static extern byte* av_get_colorspace_name([NativeTypeName("enum AVColorSpace")] AVColorSpace val);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern AVFrame* av_frame_alloc();
@@ -1069,15 +1069,15 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* av_frame_side_data_name([NativeTypeName("enum AVFrameSideDataType")] AVFrameSideDataType type);
+        public static extern byte* av_frame_side_data_name([NativeTypeName("enum AVFrameSideDataType")] AVFrameSideDataType type);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("enum AVHWDeviceType")]
-        public static extern AVHWDeviceType av_hwdevice_find_type_by_name([NativeTypeName("const char *")] sbyte* name);
+        public static extern AVHWDeviceType av_hwdevice_find_type_by_name([NativeTypeName("const char *")] byte* name);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* av_hwdevice_get_type_name([NativeTypeName("enum AVHWDeviceType")] AVHWDeviceType type);
+        public static extern byte* av_hwdevice_get_type_name([NativeTypeName("enum AVHWDeviceType")] AVHWDeviceType type);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("enum AVHWDeviceType")]
@@ -1090,7 +1090,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern int av_hwdevice_ctx_init(AVBufferRef* @ref);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_hwdevice_ctx_create(AVBufferRef** device_ctx, [NativeTypeName("enum AVHWDeviceType")] AVHWDeviceType type, [NativeTypeName("const char *")] sbyte* device, AVDictionary* opts, int flags);
+        public static extern int av_hwdevice_ctx_create(AVBufferRef** device_ctx, [NativeTypeName("enum AVHWDeviceType")] AVHWDeviceType type, [NativeTypeName("const char *")] byte* device, AVDictionary* opts, int flags);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_hwdevice_ctx_create_derived(AVBufferRef** dst_ctx, [NativeTypeName("enum AVHWDeviceType")] AVHWDeviceType type, AVBufferRef* src_ctx, int flags);
@@ -1134,13 +1134,13 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern int av_hwframe_ctx_create_derived(AVBufferRef** derived_frame_ctx, [NativeTypeName("enum AVPixelFormat")] AVPixelFormat format, AVBufferRef* derived_device_ctx, AVBufferRef* source_frame_ctx, int flags);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void av_log(void* avcl, int level, [NativeTypeName("const char *")] sbyte* fmt, __arglist);
+        public static extern void av_log(void* avcl, int level, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void av_log_once(void* avcl, int initial_level, int subsequent_level, int* state, [NativeTypeName("const char *")] sbyte* fmt, __arglist);
+        public static extern void av_log_once(void* avcl, int initial_level, int subsequent_level, int* state, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void av_vlog(void* avcl, int level, [NativeTypeName("const char *")] sbyte* fmt, [NativeTypeName("va_list")] sbyte* vl);
+        public static extern void av_vlog(void* avcl, int level, [NativeTypeName("const char *")] byte* fmt, [NativeTypeName("va_list")] byte* vl);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_log_get_level();
@@ -1149,23 +1149,23 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern void av_log_set_level(int level);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void av_log_set_callback([NativeTypeName("void (*)(void *, int, const char *, va_list)")] delegate* unmanaged[Cdecl]<void*, int, sbyte*, sbyte*, void> callback);
+        public static extern void av_log_set_callback([NativeTypeName("void (*)(void *, int, const char *, va_list)")] delegate* unmanaged[Cdecl]<void*, int, byte*, byte*, void> callback);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void av_log_default_callback(void* avcl, int level, [NativeTypeName("const char *")] sbyte* fmt, [NativeTypeName("va_list")] sbyte* vl);
+        public static extern void av_log_default_callback(void* avcl, int level, [NativeTypeName("const char *")] byte* fmt, [NativeTypeName("va_list")] byte* vl);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* av_default_item_name(void* ctx);
+        public static extern byte* av_default_item_name(void* ctx);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern AVClassCategory av_default_get_category(void* ptr);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void av_log_format_line(void* ptr, int level, [NativeTypeName("const char *")] sbyte* fmt, [NativeTypeName("va_list")] sbyte* vl, [NativeTypeName("char *")] sbyte* line, int line_size, int* print_prefix);
+        public static extern void av_log_format_line(void* ptr, int level, [NativeTypeName("const char *")] byte* fmt, [NativeTypeName("va_list")] byte* vl, [NativeTypeName("char *")] byte* line, int line_size, int* print_prefix);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_log_format_line2(void* ptr, int level, [NativeTypeName("const char *")] sbyte* fmt, [NativeTypeName("va_list")] sbyte* vl, [NativeTypeName("char *")] sbyte* line, int line_size, int* print_prefix);
+        public static extern int av_log_format_line2(void* ptr, int level, [NativeTypeName("const char *")] byte* fmt, [NativeTypeName("va_list")] byte* vl, [NativeTypeName("char *")] byte* line, int line_size, int* print_prefix);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void av_log_set_flags(int arg);
@@ -1206,11 +1206,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* av_get_sample_fmt_name([NativeTypeName("enum AVSampleFormat")] AVSampleFormat sample_fmt);
+        public static extern byte* av_get_sample_fmt_name([NativeTypeName("enum AVSampleFormat")] AVSampleFormat sample_fmt);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("enum AVSampleFormat")]
-        public static extern AVSampleFormat av_get_sample_fmt([NativeTypeName("const char *")] sbyte* name);
+        public static extern AVSampleFormat av_get_sample_fmt([NativeTypeName("const char *")] byte* name);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("enum AVSampleFormat")]
@@ -1226,7 +1226,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("char *")]
-        public static extern sbyte* av_get_sample_fmt_string([NativeTypeName("char *")] sbyte* buf, int buf_size, [NativeTypeName("enum AVSampleFormat")] AVSampleFormat sample_fmt);
+        public static extern byte* av_get_sample_fmt_string([NativeTypeName("char *")] byte* buf, int buf_size, [NativeTypeName("enum AVSampleFormat")] AVSampleFormat sample_fmt);
 
         [DllImport("avutil", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_get_bytes_per_sample([NativeTypeName("enum AVSampleFormat")] AVSampleFormat sample_fmt);

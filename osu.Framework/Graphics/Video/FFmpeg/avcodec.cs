@@ -405,10 +405,10 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int frame_bits;
 
         [NativeTypeName("char *")]
-        public sbyte* stats_out;
+        public byte* stats_out;
 
         [NativeTypeName("char *")]
-        public sbyte* stats_in;
+        public byte* stats_in;
 
         public int workaround_bugs;
 
@@ -510,7 +510,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public long pts_correction_last_dts;
 
         [NativeTypeName("char *")]
-        public sbyte* sub_charenc;
+        public byte* sub_charenc;
 
         public int sub_charenc_mode;
 
@@ -527,7 +527,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public byte* dump_separator;
 
         [NativeTypeName("char *")]
-        public sbyte* codec_whitelist;
+        public byte* codec_whitelist;
 
         [NativeTypeName("unsigned int")]
         public uint properties;
@@ -572,7 +572,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
     public unsafe partial struct AVHWAccel
     {
         [NativeTypeName("const char *")]
-        public sbyte* name;
+        public byte* name;
 
         [NativeTypeName("enum AVMediaType")]
         public AVMediaType type;
@@ -687,10 +687,10 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVSubtitleType type;
 
         [NativeTypeName("char *")]
-        public sbyte* text;
+        public byte* text;
 
         [NativeTypeName("char *")]
-        public sbyte* ass;
+        public byte* ass;
 
         public int flags;
 
@@ -877,7 +877,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVBitStreamFilterContext* next;
 
         [NativeTypeName("char *")]
-        public sbyte* args;
+        public byte* args;
     }
 
     public enum AVLockOp
@@ -916,7 +916,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
     public unsafe partial struct AVBitStreamFilter
     {
         [NativeTypeName("const char *")]
-        public sbyte* name;
+        public byte* name;
 
         [NativeTypeName("const enum AVCodecID *")]
         public AVCodecID* codec_ids;
@@ -948,7 +948,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int profile;
 
         [NativeTypeName("const char *")]
-        public sbyte* name;
+        public byte* name;
     }
 
     public partial struct AVCodecDefault
@@ -996,10 +996,10 @@ namespace osu.Framework.Graphics.Video.FFmpeg
     public unsafe partial struct AVCodec
     {
         [NativeTypeName("const char *")]
-        public sbyte* name;
+        public byte* name;
 
         [NativeTypeName("const char *")]
-        public sbyte* long_name;
+        public byte* long_name;
 
         [NativeTypeName("enum AVMediaType")]
         public AVMediaType type;
@@ -1034,7 +1034,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVProfile* profiles;
 
         [NativeTypeName("const char *")]
-        public sbyte* wrapper_name;
+        public byte* wrapper_name;
 
         public int priv_data_size;
 
@@ -1080,7 +1080,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int caps_internal;
 
         [NativeTypeName("const char *")]
-        public sbyte* bsfs;
+        public byte* bsfs;
 
         [NativeTypeName("const struct AVCodecHWConfigInternal **")]
         public AVCodecHWConfigInternal** hw_configs;
@@ -1113,15 +1113,15 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVMediaType type;
 
         [NativeTypeName("const char *")]
-        public sbyte* name;
+        public byte* name;
 
         [NativeTypeName("const char *")]
-        public sbyte* long_name;
+        public byte* long_name;
 
         public int props;
 
         [NativeTypeName("const char *const *")]
-        public sbyte** mime_types;
+        public byte** mime_types;
 
         [NativeTypeName("const struct AVProfile *")]
         public AVProfile* profiles;
@@ -1816,11 +1816,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* avcodec_configuration();
+        public static extern byte* avcodec_configuration();
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* avcodec_license();
+        public static extern byte* avcodec_license();
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [Obsolete]
@@ -2010,18 +2010,18 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("size_t")]
         [Obsolete]
-        public static extern nuint av_get_codec_tag_string([NativeTypeName("char *")] sbyte* buf, [NativeTypeName("size_t")] nuint buf_size, [NativeTypeName("unsigned int")] uint codec_tag);
+        public static extern nuint av_get_codec_tag_string([NativeTypeName("char *")] byte* buf, [NativeTypeName("size_t")] nuint buf_size, [NativeTypeName("unsigned int")] uint codec_tag);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void avcodec_string([NativeTypeName("char *")] sbyte* buf, int buf_size, AVCodecContext* enc, int encode);
-
-        [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: NativeTypeName("const char *")]
-        public static extern sbyte* av_get_profile_name([NativeTypeName("const AVCodec *")] AVCodec* codec, int profile);
+        public static extern void avcodec_string([NativeTypeName("char *")] byte* buf, int buf_size, AVCodecContext* enc, int encode);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* avcodec_profile_name([NativeTypeName("enum AVCodecID")] AVCodecID codec_id, int profile);
+        public static extern byte* av_get_profile_name([NativeTypeName("const AVCodec *")] AVCodec* codec, int profile);
+
+        [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [return: NativeTypeName("const char *")]
+        public static extern byte* avcodec_profile_name([NativeTypeName("enum AVCodecID")] AVCodecID codec_id, int profile);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int avcodec_default_execute(AVCodecContext* c, [NativeTypeName("int (*)(AVCodecContext *, void *)")] delegate* unmanaged[Cdecl]<AVCodecContext*, void*, int> func, void* arg, int* ret, int count, int size);
@@ -2057,11 +2057,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [Obsolete]
-        public static extern AVBitStreamFilterContext* av_bitstream_filter_init([NativeTypeName("const char *")] sbyte* name);
+        public static extern AVBitStreamFilterContext* av_bitstream_filter_init([NativeTypeName("const char *")] byte* name);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [Obsolete]
-        public static extern int av_bitstream_filter_filter(AVBitStreamFilterContext* bsfc, AVCodecContext* avctx, [NativeTypeName("const char *")] sbyte* args, [NativeTypeName("uint8_t **")] byte** poutbuf, int* poutbuf_size, [NativeTypeName("const uint8_t *")] byte* buf, int buf_size, int keyframe);
+        public static extern int av_bitstream_filter_filter(AVBitStreamFilterContext* bsfc, AVCodecContext* avctx, [NativeTypeName("const char *")] byte* args, [NativeTypeName("uint8_t **")] byte** poutbuf, int* poutbuf_size, [NativeTypeName("const uint8_t *")] byte* buf, int buf_size, int keyframe);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [Obsolete]
@@ -2107,7 +2107,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const AVBitStreamFilter *")]
-        public static extern AVBitStreamFilter* av_bsf_get_by_name([NativeTypeName("const char *")] sbyte* name);
+        public static extern AVBitStreamFilter* av_bsf_get_by_name([NativeTypeName("const char *")] byte* name);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const AVBitStreamFilter *")]
@@ -2145,13 +2145,13 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern int av_bsf_list_append(AVBSFList* lst, AVBSFContext* bsf);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_bsf_list_append2(AVBSFList* lst, [NativeTypeName("const char *")] sbyte* bsf_name, AVDictionary** options);
+        public static extern int av_bsf_list_append2(AVBSFList* lst, [NativeTypeName("const char *")] byte* bsf_name, AVDictionary** options);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_bsf_list_finalize(AVBSFList** lst, AVBSFContext** bsf);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_bsf_list_parse_str([NativeTypeName("const char *")] sbyte* str, AVBSFContext** bsf);
+        public static extern int av_bsf_list_parse_str([NativeTypeName("const char *")] byte* str, AVBSFContext** bsf);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_bsf_get_null_filter(AVBSFContext** bsf);
@@ -2164,13 +2164,13 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern AVCodec* avcodec_find_decoder([NativeTypeName("enum AVCodecID")] AVCodecID id);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern AVCodec* avcodec_find_decoder_by_name([NativeTypeName("const char *")] sbyte* name);
+        public static extern AVCodec* avcodec_find_decoder_by_name([NativeTypeName("const char *")] byte* name);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern AVCodec* avcodec_find_encoder([NativeTypeName("enum AVCodecID")] AVCodecID id);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern AVCodec* avcodec_find_encoder_by_name([NativeTypeName("const char *")] sbyte* name);
+        public static extern AVCodec* avcodec_find_encoder_by_name([NativeTypeName("const char *")] byte* name);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_codec_is_encoder([NativeTypeName("const AVCodec *")] AVCodec* codec);
@@ -2197,7 +2197,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const AVCodecDescriptor *")]
-        public static extern AVCodecDescriptor* avcodec_descriptor_get_by_name([NativeTypeName("const char *")] sbyte* name);
+        public static extern AVCodecDescriptor* avcodec_descriptor_get_by_name([NativeTypeName("const char *")] byte* name);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("enum AVMediaType")]
@@ -2205,7 +2205,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* avcodec_get_name([NativeTypeName("enum AVCodecID")] AVCodecID id);
+        public static extern byte* avcodec_get_name([NativeTypeName("enum AVCodecID")] AVCodecID id);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern AVCodecParameters* avcodec_parameters_alloc();
@@ -2280,7 +2280,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* av_packet_side_data_name([NativeTypeName("enum AVPacketSideDataType")] AVPacketSideDataType type);
+        public static extern byte* av_packet_side_data_name([NativeTypeName("enum AVPacketSideDataType")] AVPacketSideDataType type);
 
         [DllImport("avcodec", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("uint8_t *")]

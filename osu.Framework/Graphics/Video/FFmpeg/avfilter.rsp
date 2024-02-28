@@ -7,6 +7,8 @@ c
 --config
 unix-types
 exclude-funcs-with-body
+--remap
+char=byte
 --namespace
 osu.Framework.Graphics.Video.FFmpeg
 --methodClassName

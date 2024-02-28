@@ -25,7 +25,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
     public unsafe partial struct AVProbeData
     {
         [NativeTypeName("const char *")]
-        public sbyte* filename;
+        public byte* filename;
 
         [NativeTypeName("unsigned char *")]
         public byte* buf;
@@ -33,22 +33,22 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int buf_size;
 
         [NativeTypeName("const char *")]
-        public sbyte* mime_type;
+        public byte* mime_type;
     }
 
     public unsafe partial struct AVOutputFormat
     {
         [NativeTypeName("const char *")]
-        public sbyte* name;
+        public byte* name;
 
         [NativeTypeName("const char *")]
-        public sbyte* long_name;
+        public byte* long_name;
 
         [NativeTypeName("const char *")]
-        public sbyte* mime_type;
+        public byte* mime_type;
 
         [NativeTypeName("const char *")]
-        public sbyte* extensions;
+        public byte* extensions;
 
         [NativeTypeName("enum AVCodecID")]
         public AVCodecID audio_codec;
@@ -121,15 +121,15 @@ namespace osu.Framework.Graphics.Video.FFmpeg
     public unsafe partial struct AVInputFormat
     {
         [NativeTypeName("const char *")]
-        public sbyte* name;
+        public byte* name;
 
         [NativeTypeName("const char *")]
-        public sbyte* long_name;
+        public byte* long_name;
 
         public int flags;
 
         [NativeTypeName("const char *")]
-        public sbyte* extensions;
+        public byte* extensions;
 
         [NativeTypeName("const struct AVCodecTag *const *")]
         public AVCodecTag** codec_tag;
@@ -138,7 +138,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVClass* priv_class;
 
         [NativeTypeName("const char *")]
-        public sbyte* mime_type;
+        public byte* mime_type;
 
         [NativeTypeName("struct AVInputFormat *")]
         public AVInputFormat* next;
@@ -284,7 +284,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [NativeTypeName("char *")]
         [Obsolete]
-        public sbyte* recommended_encoder_configuration;
+        public byte* recommended_encoder_configuration;
 
         public AVCodecParameters* codecpar;
 
@@ -519,10 +519,10 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [NativeTypeName("char[1024]")]
         [Obsolete]
-        public fixed sbyte filename[1024];
+        public fixed byte filename[1024];
 
         [NativeTypeName("char *")]
-        public sbyte* url;
+        public byte* url;
 
         [NativeTypeName("int64_t")]
         public long start_time;
@@ -630,10 +630,10 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int format_probesize;
 
         [NativeTypeName("char *")]
-        public sbyte* codec_whitelist;
+        public byte* codec_whitelist;
 
         [NativeTypeName("char *")]
-        public sbyte* format_whitelist;
+        public byte* format_whitelist;
 
         public AVFormatInternal* @internal;
 
@@ -665,19 +665,19 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [NativeTypeName("int (*)(struct AVFormatContext *, AVIOContext **, const char *, int, const AVIOInterruptCB *, AVDictionary **)")]
         [Obsolete]
-        public delegate* unmanaged[Cdecl]<AVFormatContext*, AVIOContext**, sbyte*, int, AVIOInterruptCB*, AVDictionary**, int> open_cb;
+        public delegate* unmanaged[Cdecl]<AVFormatContext*, AVIOContext**, byte*, int, AVIOInterruptCB*, AVDictionary**, int> open_cb;
 
         [NativeTypeName("char *")]
-        public sbyte* protocol_whitelist;
+        public byte* protocol_whitelist;
 
         [NativeTypeName("int (*)(struct AVFormatContext *, AVIOContext **, const char *, int, AVDictionary **)")]
-        public delegate* unmanaged[Cdecl]<AVFormatContext*, AVIOContext**, sbyte*, int, AVDictionary**, int> io_open;
+        public delegate* unmanaged[Cdecl]<AVFormatContext*, AVIOContext**, byte*, int, AVDictionary**, int> io_open;
 
         [NativeTypeName("void (*)(struct AVFormatContext *, AVIOContext *)")]
         public delegate* unmanaged[Cdecl]<AVFormatContext*, AVIOContext*, void> io_close;
 
         [NativeTypeName("char *")]
-        public sbyte* protocol_blacklist;
+        public byte* protocol_blacklist;
 
         public int max_streams;
 
@@ -728,7 +728,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
     public unsafe partial struct AVIODirEntry
     {
         [NativeTypeName("char *")]
-        public sbyte* name;
+        public byte* name;
 
         public int type;
 
@@ -848,10 +848,10 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public int short_seek_threshold;
 
         [NativeTypeName("const char *")]
-        public sbyte* protocol_whitelist;
+        public byte* protocol_whitelist;
 
         [NativeTypeName("const char *")]
-        public sbyte* protocol_blacklist;
+        public byte* protocol_blacklist;
 
         [NativeTypeName("int (*)(void *, uint8_t *, int, enum AVIODataMarkerType, int64_t)")]
         public delegate* unmanaged[Cdecl]<void*, byte*, int, AVIODataMarkerType, long, int> write_data_type;
@@ -899,11 +899,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("char *")]
         [Obsolete]
-        public static extern sbyte* av_stream_get_recommended_encoder_configuration([NativeTypeName("const AVStream *")] AVStream* s);
+        public static extern byte* av_stream_get_recommended_encoder_configuration([NativeTypeName("const AVStream *")] AVStream* s);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [Obsolete]
-        public static extern void av_stream_set_recommended_encoder_configuration(AVStream* s, [NativeTypeName("char *")] sbyte* configuration);
+        public static extern void av_stream_set_recommended_encoder_configuration(AVStream* s, [NativeTypeName("char *")] byte* configuration);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("struct AVCodecParserContext *")]
@@ -977,11 +977,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("AVOpenCallback")]
         [Obsolete]
-        public static extern delegate* unmanaged[Cdecl]<AVFormatContext*, AVIOContext**, sbyte*, int, AVIOInterruptCB*, AVDictionary**, int> av_format_get_open_cb([NativeTypeName("const AVFormatContext *")] AVFormatContext* s);
+        public static extern delegate* unmanaged[Cdecl]<AVFormatContext*, AVIOContext**, byte*, int, AVIOInterruptCB*, AVDictionary**, int> av_format_get_open_cb([NativeTypeName("const AVFormatContext *")] AVFormatContext* s);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [Obsolete]
-        public static extern void av_format_set_open_cb(AVFormatContext* s, [NativeTypeName("AVOpenCallback")] delegate* unmanaged[Cdecl]<AVFormatContext*, AVIOContext**, sbyte*, int, AVIOInterruptCB*, AVDictionary**, int> callback);
+        public static extern void av_format_set_open_cb(AVFormatContext* s, [NativeTypeName("AVOpenCallback")] delegate* unmanaged[Cdecl]<AVFormatContext*, AVIOContext**, byte*, int, AVIOInterruptCB*, AVDictionary**, int> callback);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void av_format_inject_global_side_data(AVFormatContext* s);
@@ -996,11 +996,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* avformat_configuration();
+        public static extern byte* avformat_configuration();
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* avformat_license();
+        public static extern byte* avformat_license();
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [Obsolete]
@@ -1064,10 +1064,10 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern AVProgram* av_new_program(AVFormatContext* s, int id);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avformat_alloc_output_context2(AVFormatContext** ctx, AVOutputFormat* oformat, [NativeTypeName("const char *")] sbyte* format_name, [NativeTypeName("const char *")] sbyte* filename);
+        public static extern int avformat_alloc_output_context2(AVFormatContext** ctx, AVOutputFormat* oformat, [NativeTypeName("const char *")] byte* format_name, [NativeTypeName("const char *")] byte* filename);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern AVInputFormat* av_find_input_format([NativeTypeName("const char *")] sbyte* short_name);
+        public static extern AVInputFormat* av_find_input_format([NativeTypeName("const char *")] byte* short_name);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern AVInputFormat* av_probe_input_format(AVProbeData* pd, int is_opened);
@@ -1079,13 +1079,13 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern AVInputFormat* av_probe_input_format3(AVProbeData* pd, int is_opened, int* score_ret);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_probe_input_buffer2(AVIOContext* pb, AVInputFormat** fmt, [NativeTypeName("const char *")] sbyte* url, void* logctx, [NativeTypeName("unsigned int")] uint offset, [NativeTypeName("unsigned int")] uint max_probe_size);
+        public static extern int av_probe_input_buffer2(AVIOContext* pb, AVInputFormat** fmt, [NativeTypeName("const char *")] byte* url, void* logctx, [NativeTypeName("unsigned int")] uint offset, [NativeTypeName("unsigned int")] uint max_probe_size);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_probe_input_buffer(AVIOContext* pb, AVInputFormat** fmt, [NativeTypeName("const char *")] sbyte* url, void* logctx, [NativeTypeName("unsigned int")] uint offset, [NativeTypeName("unsigned int")] uint max_probe_size);
+        public static extern int av_probe_input_buffer(AVIOContext* pb, AVInputFormat** fmt, [NativeTypeName("const char *")] byte* url, void* logctx, [NativeTypeName("unsigned int")] uint offset, [NativeTypeName("unsigned int")] uint max_probe_size);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avformat_open_input(AVFormatContext** ps, [NativeTypeName("const char *")] sbyte* url, AVInputFormat* fmt, AVDictionary** options);
+        public static extern int avformat_open_input(AVFormatContext** ps, [NativeTypeName("const char *")] byte* url, AVInputFormat* fmt, AVDictionary** options);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [Obsolete]
@@ -1149,11 +1149,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern int av_write_trailer(AVFormatContext* s);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern AVOutputFormat* av_guess_format([NativeTypeName("const char *")] sbyte* short_name, [NativeTypeName("const char *")] sbyte* filename, [NativeTypeName("const char *")] sbyte* mime_type);
+        public static extern AVOutputFormat* av_guess_format([NativeTypeName("const char *")] byte* short_name, [NativeTypeName("const char *")] byte* filename, [NativeTypeName("const char *")] byte* mime_type);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("enum AVCodecID")]
-        public static extern AVCodecID av_guess_codec(AVOutputFormat* fmt, [NativeTypeName("const char *")] sbyte* short_name, [NativeTypeName("const char *")] sbyte* filename, [NativeTypeName("const char *")] sbyte* mime_type, [NativeTypeName("enum AVMediaType")] AVMediaType type);
+        public static extern AVCodecID av_guess_codec(AVOutputFormat* fmt, [NativeTypeName("const char *")] byte* short_name, [NativeTypeName("const char *")] byte* filename, [NativeTypeName("const char *")] byte* mime_type, [NativeTypeName("enum AVMediaType")] AVMediaType type);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int av_get_output_timestamp([NativeTypeName("struct AVFormatContext *")] AVFormatContext* s, int stream, [NativeTypeName("int64_t *")] long* dts, [NativeTypeName("int64_t *")] long* wall);
@@ -1185,25 +1185,25 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern int av_add_index_entry(AVStream* st, [NativeTypeName("int64_t")] long pos, [NativeTypeName("int64_t")] long timestamp, int size, int distance, int flags);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void av_url_split([NativeTypeName("char *")] sbyte* proto, int proto_size, [NativeTypeName("char *")] sbyte* authorization, int authorization_size, [NativeTypeName("char *")] sbyte* hostname, int hostname_size, int* port_ptr, [NativeTypeName("char *")] sbyte* path, int path_size, [NativeTypeName("const char *")] sbyte* url);
+        public static extern void av_url_split([NativeTypeName("char *")] byte* proto, int proto_size, [NativeTypeName("char *")] byte* authorization, int authorization_size, [NativeTypeName("char *")] byte* hostname, int hostname_size, int* port_ptr, [NativeTypeName("char *")] byte* path, int path_size, [NativeTypeName("const char *")] byte* url);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void av_dump_format(AVFormatContext* ic, int index, [NativeTypeName("const char *")] sbyte* url, int is_output);
+        public static extern void av_dump_format(AVFormatContext* ic, int index, [NativeTypeName("const char *")] byte* url, int is_output);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_get_frame_filename2([NativeTypeName("char *")] sbyte* buf, int buf_size, [NativeTypeName("const char *")] sbyte* path, int number, int flags);
+        public static extern int av_get_frame_filename2([NativeTypeName("char *")] byte* buf, int buf_size, [NativeTypeName("const char *")] byte* path, int number, int flags);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_get_frame_filename([NativeTypeName("char *")] sbyte* buf, int buf_size, [NativeTypeName("const char *")] sbyte* path, int number);
+        public static extern int av_get_frame_filename([NativeTypeName("char *")] byte* buf, int buf_size, [NativeTypeName("const char *")] byte* path, int number);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_filename_number_test([NativeTypeName("const char *")] sbyte* filename);
+        public static extern int av_filename_number_test([NativeTypeName("const char *")] byte* filename);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_sdp_create([NativeTypeName("AVFormatContext *[]")] AVFormatContext** ac, int n_files, [NativeTypeName("char *")] sbyte* buf, int size);
+        public static extern int av_sdp_create([NativeTypeName("AVFormatContext *[]")] AVFormatContext** ac, int n_files, [NativeTypeName("char *")] byte* buf, int size);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int av_match_ext([NativeTypeName("const char *")] sbyte* filename, [NativeTypeName("const char *")] sbyte* extensions);
+        public static extern int av_match_ext([NativeTypeName("const char *")] byte* filename, [NativeTypeName("const char *")] byte* extensions);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int avformat_query_codec([NativeTypeName("const AVOutputFormat *")] AVOutputFormat* ofmt, [NativeTypeName("enum AVCodecID")] AVCodecID codec_id, int std_compliance);
@@ -1231,7 +1231,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern AVRational av_guess_frame_rate(AVFormatContext* ctx, AVStream* stream, AVFrame* frame);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avformat_match_stream_specifier(AVFormatContext* s, AVStream* st, [NativeTypeName("const char *")] sbyte* spec);
+        public static extern int avformat_match_stream_specifier(AVFormatContext* s, AVStream* st, [NativeTypeName("const char *")] byte* spec);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int avformat_queue_attached_pictures(AVFormatContext* s);
@@ -1248,19 +1248,19 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* avio_find_protocol_name([NativeTypeName("const char *")] sbyte* url);
+        public static extern byte* avio_find_protocol_name([NativeTypeName("const char *")] byte* url);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avio_check([NativeTypeName("const char *")] sbyte* url, int flags);
+        public static extern int avio_check([NativeTypeName("const char *")] byte* url, int flags);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avpriv_io_move([NativeTypeName("const char *")] sbyte* url_src, [NativeTypeName("const char *")] sbyte* url_dst);
+        public static extern int avpriv_io_move([NativeTypeName("const char *")] byte* url_src, [NativeTypeName("const char *")] byte* url_dst);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avpriv_io_delete([NativeTypeName("const char *")] sbyte* url);
+        public static extern int avpriv_io_delete([NativeTypeName("const char *")] byte* url);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avio_open_dir(AVIODirContext** s, [NativeTypeName("const char *")] sbyte* url, AVDictionary** options);
+        public static extern int avio_open_dir(AVIODirContext** s, [NativeTypeName("const char *")] byte* url, AVDictionary** options);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int avio_read_dir(AVIODirContext* s, AVIODirEntry** next);
@@ -1308,13 +1308,13 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern void avio_wb16(AVIOContext* s, [NativeTypeName("unsigned int")] uint val);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avio_put_str(AVIOContext* s, [NativeTypeName("const char *")] sbyte* str);
+        public static extern int avio_put_str(AVIOContext* s, [NativeTypeName("const char *")] byte* str);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avio_put_str16le(AVIOContext* s, [NativeTypeName("const char *")] sbyte* str);
+        public static extern int avio_put_str16le(AVIOContext* s, [NativeTypeName("const char *")] byte* str);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avio_put_str16be(AVIOContext* s, [NativeTypeName("const char *")] sbyte* str);
+        public static extern int avio_put_str16be(AVIOContext* s, [NativeTypeName("const char *")] byte* str);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void avio_write_marker(AVIOContext* s, [NativeTypeName("int64_t")] long time, [NativeTypeName("enum AVIODataMarkerType")] AVIODataMarkerType type);
@@ -1335,10 +1335,10 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern int avio_feof(AVIOContext* s);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avio_printf(AVIOContext* s, [NativeTypeName("const char *")] sbyte* fmt, __arglist);
+        public static extern int avio_printf(AVIOContext* s, [NativeTypeName("const char *")] byte* fmt, __arglist);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void avio_print_string_array(AVIOContext* s, [NativeTypeName("const char *[]")] sbyte** strings);
+        public static extern void avio_print_string_array(AVIOContext* s, [NativeTypeName("const char *[]")] byte** strings);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void avio_flush(AVIOContext* s);
@@ -1385,19 +1385,19 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern ulong avio_rb64(AVIOContext* s);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avio_get_str(AVIOContext* pb, int maxlen, [NativeTypeName("char *")] sbyte* buf, int buflen);
+        public static extern int avio_get_str(AVIOContext* pb, int maxlen, [NativeTypeName("char *")] byte* buf, int buflen);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avio_get_str16le(AVIOContext* pb, int maxlen, [NativeTypeName("char *")] sbyte* buf, int buflen);
+        public static extern int avio_get_str16le(AVIOContext* pb, int maxlen, [NativeTypeName("char *")] byte* buf, int buflen);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avio_get_str16be(AVIOContext* pb, int maxlen, [NativeTypeName("char *")] sbyte* buf, int buflen);
+        public static extern int avio_get_str16be(AVIOContext* pb, int maxlen, [NativeTypeName("char *")] byte* buf, int buflen);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avio_open(AVIOContext** s, [NativeTypeName("const char *")] sbyte* url, int flags);
+        public static extern int avio_open(AVIOContext** s, [NativeTypeName("const char *")] byte* url, int flags);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avio_open2(AVIOContext** s, [NativeTypeName("const char *")] sbyte* url, int flags, [NativeTypeName("const AVIOInterruptCB *")] AVIOInterruptCB* int_cb, AVDictionary** options);
+        public static extern int avio_open2(AVIOContext** s, [NativeTypeName("const char *")] byte* url, int flags, [NativeTypeName("const AVIOInterruptCB *")] AVIOInterruptCB* int_cb, AVDictionary** options);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int avio_close(AVIOContext* s);
@@ -1416,11 +1416,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* avio_enum_protocols(void** opaque, int output);
+        public static extern byte* avio_enum_protocols(void** opaque, int output);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const AVClass *")]
-        public static extern AVClass* avio_protocol_get_class([NativeTypeName("const char *")] sbyte* name);
+        public static extern AVClass* avio_protocol_get_class([NativeTypeName("const char *")] byte* name);
 
         [DllImport("avformat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int avio_pause(AVIOContext* h, int pause);

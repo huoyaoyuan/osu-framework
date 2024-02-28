@@ -40,11 +40,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("swscale", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* swscale_configuration();
+        public static extern byte* swscale_configuration();
 
         [DllImport("swscale", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* swscale_license();
+        public static extern byte* swscale_license();
 
         [DllImport("swscale", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const int *")]

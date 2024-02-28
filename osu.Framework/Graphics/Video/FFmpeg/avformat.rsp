@@ -8,6 +8,8 @@ c
 --config
 unix-types
 exclude-funcs-with-body
+--remap
+char=byte
 --exclude
 av_hex_dump
 av_pkt_dump2

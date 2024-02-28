@@ -21,10 +21,10 @@ namespace osu.Framework.Graphics.Video.FFmpeg
     public unsafe partial struct AVFilter
     {
         [NativeTypeName("const char *")]
-        public sbyte* name;
+        public byte* name;
 
         [NativeTypeName("const char *")]
-        public sbyte* description;
+        public byte* description;
 
         [NativeTypeName("const AVFilterPad *")]
         public AVFilterPad* inputs;
@@ -60,7 +60,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVFilter* next;
 
         [NativeTypeName("int (*)(AVFilterContext *, const char *, const char *, char *, int, int)")]
-        public delegate* unmanaged[Cdecl]<AVFilterContext*, sbyte*, sbyte*, sbyte*, int, int, int> process_command;
+        public delegate* unmanaged[Cdecl]<AVFilterContext*, byte*, byte*, byte*, int, int, int> process_command;
 
         [NativeTypeName("int (*)(AVFilterContext *, void *)")]
         public delegate* unmanaged[Cdecl]<AVFilterContext*, void*, int> init_opaque;
@@ -82,7 +82,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVFilter* filter;
 
         [NativeTypeName("char *")]
-        public sbyte* name;
+        public byte* name;
 
         public AVFilterPad* input_pads;
 
@@ -111,7 +111,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVFilterCommand* command_queue;
 
         [NativeTypeName("char *")]
-        public sbyte* enable_str;
+        public byte* enable_str;
 
         public void* enable;
 
@@ -219,7 +219,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public AVBufferRef* hw_frames_ctx;
 
         [NativeTypeName("char[61440]")]
-        public fixed sbyte reserved[61440];
+        public fixed byte reserved[61440];
 
         public partial struct AVFilterChannelLayouts
         {
@@ -245,11 +245,11 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public uint nb_filters;
 
         [NativeTypeName("char *")]
-        public sbyte* scale_sws_opts;
+        public byte* scale_sws_opts;
 
         [NativeTypeName("char *")]
         [Obsolete]
-        public sbyte* resample_lavr_opts;
+        public byte* resample_lavr_opts;
 
         public int thread_type;
 
@@ -263,7 +263,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public delegate* unmanaged[Cdecl]<AVFilterContext*, delegate* unmanaged[Cdecl]<AVFilterContext*, void*, int, int, int>, void*, int*, int, int> execute;
 
         [NativeTypeName("char *")]
-        public sbyte* aresample_swr_opts;
+        public byte* aresample_swr_opts;
 
         public AVFilterLink** sink_links;
 
@@ -276,7 +276,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
     public unsafe partial struct AVFilterInOut
     {
         [NativeTypeName("char *")]
-        public sbyte* name;
+        public byte* name;
 
         public AVFilterContext* filter_ctx;
 
@@ -294,18 +294,18 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* avfilter_configuration();
+        public static extern byte* avfilter_configuration();
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* avfilter_license();
+        public static extern byte* avfilter_license();
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int avfilter_pad_count([NativeTypeName("const AVFilterPad *")] AVFilterPad* pads);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
-        public static extern sbyte* avfilter_pad_get_name([NativeTypeName("const AVFilterPad *")] AVFilterPad* pads, int pad_idx);
+        public static extern byte* avfilter_pad_get_name([NativeTypeName("const AVFilterPad *")] AVFilterPad* pads, int pad_idx);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("enum AVMediaType")]
@@ -329,7 +329,7 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern int avfilter_config_links(AVFilterContext* filter);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avfilter_process_command(AVFilterContext* filter, [NativeTypeName("const char *")] sbyte* cmd, [NativeTypeName("const char *")] sbyte* arg, [NativeTypeName("char *")] sbyte* res, int res_len, int flags);
+        public static extern int avfilter_process_command(AVFilterContext* filter, [NativeTypeName("const char *")] byte* cmd, [NativeTypeName("const char *")] byte* arg, [NativeTypeName("char *")] byte* res, int res_len, int flags);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const AVFilter *")]
@@ -350,10 +350,10 @@ namespace osu.Framework.Graphics.Video.FFmpeg
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const AVFilter *")]
-        public static extern AVFilter* avfilter_get_by_name([NativeTypeName("const char *")] sbyte* name);
+        public static extern AVFilter* avfilter_get_by_name([NativeTypeName("const char *")] byte* name);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avfilter_init_str(AVFilterContext* ctx, [NativeTypeName("const char *")] sbyte* args);
+        public static extern int avfilter_init_str(AVFilterContext* ctx, [NativeTypeName("const char *")] byte* args);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int avfilter_init_dict(AVFilterContext* ctx, AVDictionary** options);
@@ -372,13 +372,13 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern AVFilterGraph* avfilter_graph_alloc();
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern AVFilterContext* avfilter_graph_alloc_filter(AVFilterGraph* graph, [NativeTypeName("const AVFilter *")] AVFilter* filter, [NativeTypeName("const char *")] sbyte* name);
+        public static extern AVFilterContext* avfilter_graph_alloc_filter(AVFilterGraph* graph, [NativeTypeName("const AVFilter *")] AVFilter* filter, [NativeTypeName("const char *")] byte* name);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern AVFilterContext* avfilter_graph_get_filter(AVFilterGraph* graph, [NativeTypeName("const char *")] sbyte* name);
+        public static extern AVFilterContext* avfilter_graph_get_filter(AVFilterGraph* graph, [NativeTypeName("const char *")] byte* name);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avfilter_graph_create_filter(AVFilterContext** filt_ctx, [NativeTypeName("const AVFilter *")] AVFilter* filt, [NativeTypeName("const char *")] sbyte* name, [NativeTypeName("const char *")] sbyte* args, void* opaque, AVFilterGraph* graph_ctx);
+        public static extern int avfilter_graph_create_filter(AVFilterContext** filt_ctx, [NativeTypeName("const AVFilter *")] AVFilter* filt, [NativeTypeName("const char *")] byte* name, [NativeTypeName("const char *")] byte* args, void* opaque, AVFilterGraph* graph_ctx);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void avfilter_graph_set_auto_convert(AVFilterGraph* graph, [NativeTypeName("unsigned int")] uint flags);
@@ -399,23 +399,23 @@ namespace osu.Framework.Graphics.Video.FFmpeg
         public static extern void avfilter_inout_free(AVFilterInOut** inout);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avfilter_graph_parse(AVFilterGraph* graph, [NativeTypeName("const char *")] sbyte* filters, AVFilterInOut* inputs, AVFilterInOut* outputs, void* log_ctx);
+        public static extern int avfilter_graph_parse(AVFilterGraph* graph, [NativeTypeName("const char *")] byte* filters, AVFilterInOut* inputs, AVFilterInOut* outputs, void* log_ctx);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avfilter_graph_parse_ptr(AVFilterGraph* graph, [NativeTypeName("const char *")] sbyte* filters, AVFilterInOut** inputs, AVFilterInOut** outputs, void* log_ctx);
+        public static extern int avfilter_graph_parse_ptr(AVFilterGraph* graph, [NativeTypeName("const char *")] byte* filters, AVFilterInOut** inputs, AVFilterInOut** outputs, void* log_ctx);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avfilter_graph_parse2(AVFilterGraph* graph, [NativeTypeName("const char *")] sbyte* filters, AVFilterInOut** inputs, AVFilterInOut** outputs);
+        public static extern int avfilter_graph_parse2(AVFilterGraph* graph, [NativeTypeName("const char *")] byte* filters, AVFilterInOut** inputs, AVFilterInOut** outputs);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avfilter_graph_send_command(AVFilterGraph* graph, [NativeTypeName("const char *")] sbyte* target, [NativeTypeName("const char *")] sbyte* cmd, [NativeTypeName("const char *")] sbyte* arg, [NativeTypeName("char *")] sbyte* res, int res_len, int flags);
+        public static extern int avfilter_graph_send_command(AVFilterGraph* graph, [NativeTypeName("const char *")] byte* target, [NativeTypeName("const char *")] byte* cmd, [NativeTypeName("const char *")] byte* arg, [NativeTypeName("char *")] byte* res, int res_len, int flags);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int avfilter_graph_queue_command(AVFilterGraph* graph, [NativeTypeName("const char *")] sbyte* target, [NativeTypeName("const char *")] sbyte* cmd, [NativeTypeName("const char *")] sbyte* arg, int flags, double ts);
+        public static extern int avfilter_graph_queue_command(AVFilterGraph* graph, [NativeTypeName("const char *")] byte* target, [NativeTypeName("const char *")] byte* cmd, [NativeTypeName("const char *")] byte* arg, int flags, double ts);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("char *")]
-        public static extern sbyte* avfilter_graph_dump(AVFilterGraph* graph, [NativeTypeName("const char *")] sbyte* options);
+        public static extern byte* avfilter_graph_dump(AVFilterGraph* graph, [NativeTypeName("const char *")] byte* options);
 
         [DllImport("avfilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int avfilter_graph_request_oldest(AVFilterGraph* graph);
