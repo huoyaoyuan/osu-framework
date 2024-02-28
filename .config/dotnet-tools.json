@@ -25,6 +25,12 @@
       "commands": [
         "CodeFileSanity"
       ]
+    },
+    "clangsharppinvokegenerator": {
+      "version": "17.0.1",
+      "commands": [
+        "ClangSharpPInvokeGenerator"
+      ]
     }
   }
 }
