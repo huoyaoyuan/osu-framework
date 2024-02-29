@@ -4,9 +4,9 @@
 using System;
 using osu.Framework.Graphics.Textures;
 using osuTK.Graphics.ES30;
-using FFmpeg.AutoGen;
 using osu.Framework.Graphics.Primitives;
 using SixLabors.ImageSharp.PixelFormats;
+using osu.Framework.Graphics.Video.FFmpeg;
 
 namespace osu.Framework.Graphics.Video
 {

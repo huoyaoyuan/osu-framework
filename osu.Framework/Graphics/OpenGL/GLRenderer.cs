@@ -253,7 +253,7 @@ namespace osu.Framework.Graphics.OpenGL
                 {
                     // Older desktop platforms don't support glClearDepthf, so standard GL's double version is used instead
                     // See: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glClearDepth.xhtml
-                    osuTK.Graphics.OpenGL.GL.ClearDepth(clearInfo.Depth);
+                    GL4.GL.ClearDepth(clearInfo.Depth);
                 }
             }
 

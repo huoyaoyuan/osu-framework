@@ -74,7 +74,7 @@ namespace osu.Framework.Graphics.Veldrid.Textures
                     videoUpload.GetPlaneWidth(i),
                     videoUpload.GetPlaneHeight(i),
                     0,
-                    new IntPtr(videoUpload.Frame->data[i]),
+                    new IntPtr(videoUpload.Frame->data[(int)i]),
                     videoUpload.Frame->linesize[i]);
             }
         }

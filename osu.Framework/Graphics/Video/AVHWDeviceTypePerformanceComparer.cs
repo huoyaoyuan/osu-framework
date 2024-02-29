@@ -2,7 +2,7 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System.Collections.Generic;
-using FFmpeg.AutoGen;
+using osu.Framework.Graphics.Video.FFmpeg;
 
 namespace osu.Framework.Graphics.Video
 {

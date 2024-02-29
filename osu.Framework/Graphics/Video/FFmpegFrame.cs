@@ -5,7 +5,7 @@
 
 using System;
 using System.Diagnostics;
-using FFmpeg.AutoGen;
+using osu.Framework.Graphics.Video.FFmpeg;
 
 namespace osu.Framework.Graphics.Video
 {
@@ -19,14 +19,12 @@ namespace osu.Framework.Graphics.Video
             set => Pointer->format = (int)value;
         }
 
-        private readonly FFmpegFuncs ffmpeg;
         private readonly Action<FFmpegFrame> returnDelegate;
 
-        internal FFmpegFrame(FFmpegFuncs ffmpeg, Action<FFmpegFrame> returnDelegate = null)
+        internal FFmpegFrame(Action<FFmpegFrame> returnDelegate = null)
         {
-            Pointer = ffmpeg.av_frame_alloc();
+            Pointer = FFmpegNative.av_frame_alloc();
 
-            this.ffmpeg = ffmpeg;
             this.returnDelegate = returnDelegate;
         }
 
@@ -46,7 +44,7 @@ namespace osu.Framework.Graphics.Video
                 return;
 
             fixed (AVFrame** ptr = &Pointer)
-                ffmpeg.av_frame_free(ptr);
+                FFmpegNative.av_frame_free(ptr);
         }
     }
 }
